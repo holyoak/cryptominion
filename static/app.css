@@ -1,0 +1,106 @@
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#fab{
+  left: 0px;
+  position: fixed;
+  padding: 1rem;
+  top: 0px;
+  z-index: 8;
+}
+#settings{
+  position: fixed;
+  padding: 1rem;
+  right: 0px;
+  top: 0px;
+  z-index: 8;
+}
+#upper-pane{
+  height: 16rem;
+  margin-bottom: 2rem;
+}
+#lower-pane{
+  flex: 1 0 auto;
+  margin-top: 6rem;
+  overflow-y: auto;
+}
+.app-row{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.app-rowrap{
+  display: flex;
+  flex-flow: row wrap;
+}
+.app-col{
+  display: flex;
+  flex-flow: column nowrap;
+}
+.app-col .wrap{
+  display: flex;
+  flex-flow: column wrap;
+}
+.flex{
+  flex: 1 0 auto;
+}
+.j-between{
+  justify-content: space-between;
+}
+.j-around{
+  justify-content: space-around;
+}
+.j-end{
+  justify-content: flex-end;
+}
+.j-even{
+  justify-content: space-evenly;
+}
+.i-baseline{
+  align-items: baseline;
+}
+.i-center{
+  align-items: center;
+}
+.i-end{
+  align-items: flex-end;
+}
+.i-start{
+  align-items: flex-start;
+}
+.i-stretch{
+  align-items: stretch;
+}
+.icon-small{
+  width: 3rem;
+  height: 3rem;
+}
+.icon-nav{
+  cursor: pointer;
+  height: 4rem;
+  width: 4rem;
+}
+.icon-nav-small{
+  cursor: pointer;
+  height: 2rem;
+  margin: .25rem;
+  width: 2rem;
+}
+.left{
+  align-items: left;
+  text-align: left;
+}
+.right{
+  align-items: right;
+  text-align: right;
+}
+.full-span{
+  width: 100%;
+}

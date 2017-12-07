@@ -1,0 +1,18 @@
+{
+  "orders": {
+    "stop_loss": 0.02,
+    "trail_stop": 0.02,
+    "taker": false,
+    "type": "GTC",
+    "portions": 10
+    },
+  "assets": [
+    "AEON",
+    "ARK",
+    "USD",
+    "BTC",
+    "ETH",
+    "LTC",
+    "XMR"
+  ]
+}

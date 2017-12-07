@@ -1,0 +1,19 @@
+.oak-button{
+  cursor: pointer;
+  position: relative;
+}
+.oak-checkbox{
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.oak-checkbox-check{
+  cursor: pointer;
+}
+.oak-util-b{
+  background-color: rgba(4,4,4,0.2);
+  height: 100%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+}

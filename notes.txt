@@ -1,0 +1,5 @@
+vue-material has got to go
+
+vue-router has got to go
+
+ws and the native Websocket are good

@@ -1,0 +1,55 @@
+{
+  "dataStreams" : {
+    "port": 3200,
+    "color": "#AD36D2"
+  },
+  "gdax": {
+    "uri": "wss://ws-feed.gdax.com",
+    "auth": {},
+    "channels": [ "level2", "matches" ],
+    "productIDs": [
+      "BTC-USD",
+      "ETH-USD",
+      "LTC-USD",
+      "ETH-BTC",
+      "LTC-BTC"
+    ]
+  },
+  "poloniex": {
+    "uri": "wss://api.poloniex.com",
+    "auth": {},
+    "channels": [ "ticker" ],
+    "productIDs": [
+      "USDT_BTC",
+      "USDT_ETH",
+      "USDT_LTC",
+      "USDT_XMR",
+      "BTC_LTC",
+      "BTC_XMR"
+    ]
+  },
+  "appName": "CryptoMinion",
+  "layout": {
+    "breakpoints": {
+    "phablet": 500,
+    "tablet": 850,
+    "desktop": 1200
+    }
+  },
+  "initialState": {
+    "nav": {
+        "view": "splash",
+        "upperDiv": "splash",
+        "lowerDiv": "accounts-view"
+    },
+    "theme": {
+      "tone": "Day",
+      "color": "Greyscale",
+      "fontSize": 16
+    },
+    "ui": {
+      "anims": "on",
+      "animDuration": 6
+    }
+  }
+}

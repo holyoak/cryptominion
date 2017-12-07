@@ -1,0 +1,30 @@
+{
+  "bittrex": {
+    "accent": "#FCFFFA",
+    "background": "#014EA0",
+    "color": "#017AFD",
+    "icon": "./bittrex.jpeg",
+    "name": "Bittrex"
+  },
+  "gdax": {
+    "accent": "#B3B6C7",
+    "background": "#363D5E",
+    "color": "#45518C",
+    "icon": "./gdax.jpeg",
+    "name": "GDAX"
+  },
+  "poloniex": {
+    "accent": "#54D86B",
+    "background": "#124329",
+    "color": "#216B44",
+    "icon": "./poloniex.jpeg",
+    "name": "Poloniex"
+  },
+  "default": {
+    "accent": "#A1A1A1",
+    "background": "#212121",
+    "color": "#717171",
+    "icon": "./default.jpeg",
+    "name": ""
+  }
+}

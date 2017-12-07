@@ -1,0 +1,170 @@
+{
+  "data": {
+    "gdax" : {
+      "key": "gdax",
+      "name": "GDAX",
+      "markets": {
+        "BTC-USD": {
+          "id": "BTC-USD",
+          "base": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2
+        },
+        "ETH-USD": {
+          "id": "ETH-USD",
+          "base": {
+            "name": "ETH",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2   },
+        "LTC-USD": {
+          "id": "LTC-USD",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2},
+        "ETH-BTC": {
+          "id": "ETH-BTC",
+          "base": {
+            "name": "ETH",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        },
+        "LTC-BTC": {
+          "id": "LTC-BTC",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        }
+      },
+      "balances": {
+        "USD": {
+          "balance": 1000000.99,
+          "available": 102
+        },
+        "BTC": {
+          "balance": 10.12345678,
+          "available": 10.123456782
+        },
+        "LTC": {
+          "balance": 10,
+          "available": 52
+        }
+      }
+    },
+    "poloniex": {
+      "key": "poloniex",
+      "name": "Poloniex",
+      "markets": {
+        "BTC-USD": {
+          "id": "BTC-USD",
+          "base": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 8
+          },
+          "precision": 8},
+        "ETH-USD": {
+          "id": "LTC-USD",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 8
+          },
+          "precision": 8},
+        "LTC-USD": {
+          "id": "LTC-USD",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 8
+          },
+          "precision": 8},
+        "XMR-USD": {
+          "id": "XMR-USD",
+          "base": {
+            "name": "XMR",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 8   },
+        "LTC-BTC": {
+          "id": "LTC-BTC",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        },
+        "XMR-BTC": {
+          "id": "XMR-BTC",
+          "base": {
+            "name": "XMR",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        }
+      },
+      "balances": {
+        "USD": {
+          "balance": 2000000.99,
+          "available": 10000.872
+        },
+        "BTC": {
+          "balance": 10.12345678,
+          "available": 10.123456782
+        },
+        "XMR": {
+          "balance": 10.0678,
+          "available": 5
+        }
+      }
+    }
+  }
+}
