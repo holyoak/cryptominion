@@ -4,23 +4,36 @@
   <div id="traderAccount" class="lower"
     v-if="dataReady"
     v-bind:style="{ color:theme.accent,   backgroundColor: theme.color }">
-      <div class="icon"
+      <div class="trade-icon"
         v-bind:style="{ borderColor:theme.color }">
         <img v-bind:src="exIcon">
       </div>
     <div id="tradeHeader" md-row class="app-row j-even">
-      <div class="sm-icon">
+      <div class="icon-small">
         <img v-bind:src="quoteIcon">
       </div>
       <h2>{{ theme.name }}</h2>
       <div v-if="streamReady">Last Price: {{ lastPrice }} {{ market.quote.name }}  </div>
       <h2>{{ market.id }}</h2>
-      <div class="sm-icon">
+      <div class="icon-small">
         <img v-bind:src="baseIcon">
       </div>
     </div>
-    <div v-if="!streamReady">
-    NonStream Trade Panel Goes Here
+    <div class="app-row" v-if="!streamReady">
+      <div id="traderBuy" class="tradePanel">
+        <trade-panel-no-data
+          :asset="quoteAsset"
+          :exKey="exKey"
+          :market="market">
+        </trade-panel-no-data>
+      </div>
+      <div id="traderSell" class="tradePanel">
+        <trade-panel-no-data
+          :asset="baseAsset"
+          :exKey="exKey"
+          :market="market">
+        </trade-panel-no-data>
+      </div>
     </div>
     <div class="app-row" v-if="streamReady">
       <div id="traderBuy" class="tradePanel">
@@ -51,6 +64,7 @@
 <script>
 import themeAssets from '../../../assets/exchanges/exchanges.json'
 import TraderGui from './TraderGui'
+import TradePanelNoData from './TraderPanel.NoData'
 import { Tickers } from '../../tickers/components'
 
 export default {
@@ -58,6 +72,7 @@ export default {
 
   components: {
     TraderGui,
+    TradePanelNoData,
     Tickers
   },
 
@@ -121,15 +136,13 @@ export default {
     baseAsset: function () {
       return {
         side: 'sell',
-        name: this.base.name,
-        balance: this.base
+        name: this.base.name
       }
     },
     quoteAsset: function () {
       return {
         side: 'buy',
-        name: this.quote.name,
-        balance: this.quote
+        name: this.quote.name
       }
     },
     exIcon: function () {
@@ -155,34 +168,5 @@ export default {
 </script>
 
 <style scoped>
-#traderAccount{
-  position: relative;
-  margin: 1em;
-  padding: 1em;
-  overflow: visible;
-}
-#traderBuy {
-  background-color: #5AAC5E;
-}
-#traderSell {
-  background-color: #A33643;
-}
-.tradePanel{
-  color: black;
-  flex: 1 0 auto;
-  max-width: 50%;
-}
-.icon{
-  border: solid;
-  position: absolute;
-  top: -2em;
-  left: -1em;
-  height: 4em;
-  width: 4em;
-}
-.sm-icon{
-  height: 3em;
-  width: 3em;
-  margin-bottom: .5em;
-}
+  @import'./trader.css';
 </style>

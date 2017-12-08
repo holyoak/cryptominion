@@ -30,7 +30,8 @@
 #lower-pane{
   flex: 1 0 auto;
   margin-top: 6rem;
-  overflow-y: auto;
+  overflow: visible;
+  z-index: 7;
 }
 .app-row{
   display: flex;
@@ -78,10 +79,6 @@
 .i-stretch{
   align-items: stretch;
 }
-.icon-small{
-  width: 3rem;
-  height: 3rem;
-}
 .icon-nav{
   cursor: pointer;
   height: 4rem;
@@ -92,6 +89,10 @@
   height: 2rem;
   margin: .25rem;
   width: 2rem;
+}
+.icon-small{
+  width: 3rem;
+  height: 3rem;
 }
 .left{
   align-items: left;

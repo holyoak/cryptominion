@@ -1,7 +1,9 @@
 <template>
 <div class="ticker" v-bind:style="{ backgroundColor: theme.background }">
-  <div v-if="!ticker">
-    No Ticker Data Available
+  <div v-if="!ticker"
+    v-bind:style="{ backgroundColor: theme.color, color: theme.accent }">
+    <b>{{ theme.name }}</b>
+    <div>No Ticker Data Available</div>
   </div>
   <div class="app-row j-around title"
     v-if="ticker"

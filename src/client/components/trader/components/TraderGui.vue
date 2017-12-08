@@ -196,54 +196,6 @@ export default {
 }
 </script>
 
-<style>
-.core-wrapper{
-   position: relative;
-   margin: 0em .5em 0em .5em;
-}
-.core-input{
-   position: absolute;
-   top: 1em;
-}
-.core-buttons{
-   flex: 1 0 auto;
-   position: absolute;
-   top: 5em;
-}
-.exec{
-  border: solid;
-  cursor: pointer;
-  margin: 1em;
-  width: 100%;
-}
-.top-input{
-   flex: 1;
-}
-.small-icon{
-  background-color: #BB963C;
-  border-radius: .5em;
-  cursor: pointer;
-  margin: .5em;
-  height: 1.5em;
-  width: 1.5em;
-  text-align: center;
-}
-.label{
-  padding: 1em;
-  flex: 1;
-  text-align: right;
-}
-.spaced{
-  justify-content: space-around;
-}
-.trade-panel{
-}
-.userInput{
-  padding: 1em;
-  flex: 0;
-  width: 5px;
-}
-#execute{
-  padding: 3em;
-}
+<style scoped>
+  @import'./trader.css';
 </style>

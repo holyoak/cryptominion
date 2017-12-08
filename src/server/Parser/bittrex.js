@@ -60,9 +60,12 @@ function parseMarkets (data) {
  * @return {String}                  normalized marketID
  */
 function normalizeID (marketID) {
+  const res = {}
   const i = marketID.indexOf('-')
-  const base = marketID.slice(i + 1)
-  const quote = marketID.slice(0, i)
-  const res = base + '-' + quote
-  return res
+  res.base = marketID.slice(i + 1)
+  res.base = res.base === 'USDT' ? 'USD' : res.base
+  res.quote = marketID.slice(0, i)
+  res.quote = res.quote === 'USDT' ? 'USD' : res.quote
+  res.id = res.base + '-' + res.quote
+  return res.id
 }
