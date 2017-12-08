@@ -1,12 +1,12 @@
 <template v-if="dataLoaded">
 <div class="tickers">
-  <md-layout md-row class="j-around">
+  <div class="app-row j-around">
     <ticker
       v-for="tickerKey in tickerKeys"
       :tickerKey="tickerKey"
       v-bind:key="tickerKey.id"
     ></ticker>
-  </md-layout>
+  </div>
 </div>
 </template>
 

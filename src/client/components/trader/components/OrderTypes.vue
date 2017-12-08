@@ -16,8 +16,8 @@
     </div>
     <div class="app-row i-center">
       <oak-checkbox
-        :checked="portions"
-        v-on:click="setPortions('x')"></oak-checkbox>
+        :checked="portions.active"
+        v-on:click="setPortions"></oak-checkbox>
       <div><small>Portions</small></div>
     </div>
 </div>
@@ -45,7 +45,7 @@ export default {
       this.$emit('set_maker_only', !x)
     },
     setPortions: function (x) {
-      this.$emit('portions', x)
+      this.$emit('set_portions', !x)
     }
 
   }
