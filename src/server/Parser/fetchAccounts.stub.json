@@ -1,5 +1,83 @@
 {
   "data": {
+    "bittrex":{
+      "key": "bittrex",
+      "name": "Bittrex",
+      "markets": {
+        "BTC-USD": {
+          "id": "BTC-USD",
+          "base": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2
+        },
+        "ETH-USD": {
+          "id": "ETH-USD",
+          "base": {
+            "name": "ETH",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2   },
+        "LTC-USD": {
+          "id": "LTC-USD",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "USD",
+            "precision": 2
+          },
+          "precision": 2},
+        "ETH-BTC": {
+          "id": "ETH-BTC",
+          "base": {
+            "name": "ETH",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        },
+        "LTC-BTC": {
+          "id": "LTC-BTC",
+          "base": {
+            "name": "LTC",
+            "precision": 8
+          },
+          "quote": {
+            "name": "BTC",
+            "precision": 8
+          },
+          "precision": 8
+        }
+      },
+      "balances": {
+        "USD": {
+          "balance": 1000000.99,
+          "available": 102
+        },
+        "BTC": {
+          "balance": 10.12345678,
+          "available": 10.123456782
+        },
+        "LTC": {
+          "balance": 10,
+          "available": 52
+        }
+      }
+    },
     "gdax" : {
       "key": "gdax",
       "name": "GDAX",
@@ -80,7 +158,7 @@
     },
     "poloniex": {
       "key": "poloniex",
-      "name": "Poloniex",
+      "name": "poloniex",
       "markets": {
         "BTC-USD": {
           "id": "BTC-USD",
