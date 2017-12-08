@@ -7,7 +7,7 @@ module.exports = {
 }
 
 /**
- * normalize GDAX market data into app schema
+ * normalize Poloniex market data into app schema
  * @param  {Object}      data           raw ccxt loadMarkets() return data from GDAX
  * @return {Object}                     normalized data
  */
@@ -24,16 +24,17 @@ function parseBalances (data) {
 }
 
 /**
- * normalize GDAX market data into app schema
+ * normalize Poloniex market data into app schema
  * @param  {Object}      data           raw ccxt loadMarkets() return data from GDAX
  * @return {Object}                     normalized data
  */
 function parseMarkets (data) {
-  console.log('Into gdax.parseMarkets')
+  console.log('Into poloniex.parseMarkets')
   const res = {}
   for (const x in data) {
-    res[data[x].id] = {
-      id: data[x].id,
+    const id = normalizeID(data[x].id)
+    res[id] = {
+      id: id,
       base: {
         name: data[x].base,
         min: data[x].limits.amount.min,
@@ -51,5 +52,18 @@ function parseMarkets (data) {
       }
     }
   }
+  return res
+}
+
+/**
+ * normalize marketID to <base>-<quote> syntax
+ * @param  {String} marketID         raw data marketID
+ * @return {String}                  normalized marketID
+ */
+function normalizeID (marketID) {
+  const i = marketID.indexOf('_')
+  const base = marketID.slice(i + 1)
+  const quote = marketID.slice(0, i)
+  const res = base + '-' + quote
   return res
 }

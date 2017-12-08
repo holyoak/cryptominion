@@ -28,7 +28,6 @@ function parse (client, ID) {
  * @return {Object}               app state fragment
  */
 function parseData (data, ID) {
-  console.log('parseBalance data is ' + JSON.stringify(data))
   const res = {
     flag: 'load balances',
     data: { id: ID }

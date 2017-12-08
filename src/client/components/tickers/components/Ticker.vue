@@ -1,10 +1,15 @@
 <template>
 <div class="ticker" v-bind:style="{ backgroundColor: theme.background }">
-  <md-layout row class="title j-around"
+  <div v-if="!ticker">
+    No Ticker Data Available
+  </div>
+  <div class="app-row j-around title"
+    v-if="ticker"
     v-bind:style="{ backgroundColor: theme.color, color: theme.accent }">
     <div><b>{{ theme.name }}</b></div>
-  </md-layout>
+  </div>
   <tick
+    v-if="ticker"
     v-for="tick of ticker.data"
     :tick="tick"
     :precision="precision"
@@ -32,9 +37,10 @@ export default {
     ...mapState({
       'ticker': function (state) {
         const k = this.tickerKey
-        const ticker = state.tickers.tickers[k.exchange][k.market]
+        const ticker = state.tickers.tickers[k.exchange] &&
+          state.tickers.tickers[k.exchange][k.market]
           ? state.tickers.tickers[k.exchange][k.market]
-          : {}
+          : false
         return ticker
       },
       'precision': function (state) {
