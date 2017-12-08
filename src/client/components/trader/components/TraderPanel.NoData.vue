@@ -6,7 +6,7 @@
       <div>
         Available {{ asset.name }}: {{ activeBalance }}
       </div>
-      <input v-model.number="newOrder.amount" type="number">
+      <input v-model.number="newOrder.amount" placeholder="Amount" type="text">
       <div class="app-row j-end core-buttons">
         <div class="small-icon"
           @click="openDialog('percentDialog')">
@@ -32,12 +32,9 @@
     </div>
     <div class="app-col core-wrapper">
       <div>
-        Price: {{ market.quote.name }}
+        Price:
       </div>
-      <md-input-container>
-        <label>Price</label>
-        <md-input id="price" type="text" placeholder="Price" v-model.number="newOrder.price"></md-input>
-      </md-input-container>
+      <input v-model.number="newOrder.price" placeholder="Price" type="text">
     </div>
     <div class="exec">
       Execute
@@ -104,8 +101,7 @@ export default {
           .balances[this.asset.name].available > 0) {
         return this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name].available
-      }
-      else return false
+      } else return false
     }
   },
 
@@ -120,12 +116,13 @@ export default {
       const p = this.asset.side === 'buy'
         ? this.market.quote.precision
         : this.market.base.precision
-      this.newOrder.amount = ((x / 100) * this.asset.balance.available)
+      this.newOrder.amount = ((x / 100) * this.activeBalance)
         .toFixed(p)
       if (ref) this.closeDialog(ref)
     },
     setMakerOnly (x) {
-      this.newOrder.makerOnly = x
+      console.log('setmakerOnly is ' + x)
+      this.newOrder.makerOnly = x === false ? true : false
     },
     setPrice (x) { this.newOrder.price = Number(x) }
   }

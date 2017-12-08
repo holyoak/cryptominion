@@ -149,12 +149,18 @@ export default {
       return require('../../../assets/exchanges/' + this.exKey + '.jpeg')
     },
     baseIcon: function () {
-      return require('../../../assets/assets/' +
-        this.base.name + '.png')
+      try {
+        return require('../../../assets/assets/' + this.base.name + '.png')
+      } catch (ex) {
+        return require('../../../assets/assets/XMR.svg')
+      }
     },
     quoteIcon: function () {
-      return require('../../../assets/assets/' +
-        this.quote.name + '.png')
+      try {
+        return require('../../../assets/assets/' + this.quote.name + '.png')
+      } catch (ex) {
+        return require('../../../assets/assets/XMR.svg')
+      }
     },
     tickerKey: function () {
       return {

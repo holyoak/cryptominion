@@ -1,5 +1,4 @@
 .core-wrapper{
-   position: relative;
    margin: 0em .5em 0em .5em;
 }
 .core-input{
@@ -8,8 +7,6 @@
 }
 .core-buttons{
    flex: 1 0 auto;
-   position: absolute;
-   top: 5em;
 }
 .exec{
   border: solid;

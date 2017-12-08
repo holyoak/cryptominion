@@ -2,16 +2,22 @@
 <div class="app-rowrap j-even order-types">
     <div class="app-row i-center">
       <oak-checkbox
-        :active="makerOnly"
+        :checked="makerOnly"
         v-on:click="setMakerOnly"></oak-checkbox>
       <div><small>Maker Only</small></div>
     </div>
     <div class="app-row i-center">
       <div><small>Order Type:</small></div>
-      <div><small>GTC</small></div>
+      <select v-model="orderType">
+        <option v-for="option in orderTypes" v-bind:value="option.value">
+          {{ option.text }}
+        </option>
+      </select>
     </div>
     <div class="app-row i-center">
-      <md-checkbox v-model="portions.active"></md-checkbox>
+      <oak-checkbox
+        :checked="portions"
+        v-on:click="setPortions('x')"></oak-checkbox>
       <div><small>Portions</small></div>
     </div>
 </div>
@@ -23,12 +29,25 @@ export default {
 
   props: [ 'makerOnly', 'type', 'portions' ],
 
-  data () { return {} },
+  data () {
+    return {
+      orderTypes: [
+        { text: 'Fill or Kill', value: 'FOK' },
+        { text: 'Good til Cancel', value: 'GTC' },
+        { text: 'Now or Cancel', value: 'IOC' }
+      ],
+      orderType: 'GTC'
+    }
+  },
 
   methods: {
     setMakerOnly: function (x) {
-      this.$emit('set_maker_only', x)
+      this.$emit('set_maker_only', !x)
+    },
+    setPortions: function (x) {
+      this.$emit('portions', x)
     }
+
   }
 
 }
