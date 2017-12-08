@@ -42,6 +42,7 @@
     <order-types
       :makerOnly="newOrder.makerOnly"
       v-on:set_maker_only="setMakerOnly"
+      v-on:set_portions="setPortions"
       :type="newOrder.type"
       :portions="newOrder.portions">
     </order-types>
@@ -116,13 +117,17 @@ export default {
       const p = this.asset.side === 'buy'
         ? this.market.quote.precision
         : this.market.base.precision
-      this.newOrder.amount = ((x / 100) * this.activeBalance)
-        .toFixed(p)
+      this.newOrder.amount = Number(((x / 100) * this.activeBalance)
+        .toFixed(p))
       if (ref) this.closeDialog(ref)
     },
     setMakerOnly (x) {
       console.log('setmakerOnly is ' + x)
-      this.newOrder.makerOnly = x === false ? true : false
+      this.newOrder.makerOnly = !x
+    },
+    setPortions (x) {
+      console.log('setPortions is ' + x)
+      this.newOrder.portions.active = !x
     },
     setPrice (x) { this.newOrder.price = Number(x) }
   }
