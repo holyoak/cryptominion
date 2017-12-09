@@ -17,6 +17,9 @@
     :label="activeLabel"
     :userInput="activeInput">
   </component>
+  <div>
+    <img src="./drawing.svg">
+  </div>
 </div>
 </template>
 
