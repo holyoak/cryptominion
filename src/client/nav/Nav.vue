@@ -71,6 +71,7 @@ export default {
     },
     openDialog (ref) {
       this.$refs[ref].open()
+      document.getElementById('practice').style.fill = 'red'
     },
     openMyDialog (ref) {
       document.getElementById('modl_root').style.display = 'block'

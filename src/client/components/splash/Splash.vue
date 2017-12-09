@@ -17,12 +17,15 @@
     :label="activeLabel"
     :userInput="activeInput">
   </component>
+  <div id="test">
+  </div>
 </div>
 </template>
 
 <script>
 import TextInput from './TextInput'
 import OtherTextInput from './TextInput2'
+import Practice from './drawing.svg.js'
 
 export default {
   name: 'splash-view',
@@ -35,6 +38,7 @@ export default {
   data () {
     return {
       active: false,
+      practice: Practice,
       currentView: 'text-input',
       label: 'Input Component Label',
       userInput: 'placeholder',
@@ -53,6 +57,10 @@ export default {
     activeInput () {
       return this.active === true ? this.userInput : this.otherUserInput
     }
+  },
+
+  mounted () {
+    document.getElementById('test').innerHTML = Practice
   },
 
   methods: {
