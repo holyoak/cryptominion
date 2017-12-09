@@ -2,7 +2,7 @@
 <div class="stops">
   <div class="app-rowrap j-even">
     <div class="app-row i-center">
-      <md-checkbox v-model="stopLoss.active"></md-checkbox>
+      <oak-checkbox v-model="stopLoss.active"></oak-checkbox>
       <div v-if="!stopLoss.active"><small>Stop Loss</small></div>
       <div class="small-icon"
         v-if="stopLoss.active"
@@ -10,14 +10,14 @@
         <img src="../assets/percent.svg">
       </div>
       <div v-if="stopLoss.active">
-        <md-input-container>
+        <div>
           <label>Stop Loss</label>
-          <md-input id="stopLoss" type="text" placeholder="Stop Loss" v-model.number="stopLoss.price"></md-input>
-          </md-input-container>
+          <input id="stopLoss" type="text" placeholder="Stop Loss" v-model.number="stopLoss.price"></input>
+          </div>
       </div>
     </div>
     <div class="app-row i-center">
-      <md-checkbox v-model="trailStop.active"></md-checkbox>
+      <oak-checkbox v-model="trailStop.active"></oak-checkbox>
       <div v-if="!trailStop.active"><small>Trailing Stop</small></div>
       <div class="small-icon"
         v-if="trailStop.active"
@@ -25,23 +25,23 @@
         <img src="../assets/percent.svg">
       </div>
       <div v-if="trailStop.active" class="percent">
-        <md-input-container>
+        <div>
           <label>Trailing Stop Starts</label>
-          <md-input id="trail_stop" type="text" placeholder="Trailing Stop Starts" v-model.number="trailStop.activePercent">
-          </md-input>
-        </md-input-container>
+          <input id="trail_stop" type="text" placeholder="Trailing Stop Starts" v-model.number="trailStop.activePercent">
+          </input>
+        </div>
       </div>
       <div v-if="trailStop.active" class="percent">
-        <md-input-container>
+        <div>
           <label>Trailing Stop Stops</label>
-            <md-input id="trail_stop" type="text" placeholder="Trailing Stop  Stops" v-model.number="trailStop.stopPercent">
-            </md-input>
-        </md-input-container>
+            <input id="trail_stop" type="text" placeholder="Trailing Stop  Stops" v-model.number="trailStop.stopPercent">
+            </input>
+        </div>
       </div>
     </div>
 
-    <div class="app-row i-center">
-      <md-checkbox v-model="autoClose.active"></md-checkbox>
+    <div class="app-row i-center">oak
+      <oak-checkbox v-model="autoClose.active"></oak-checkbox>
       <div v-if="!autoClose.active"><small>Auto Close</small></div>
       <div class="small-icon"
         v-if="autoClose.active"
@@ -49,15 +49,15 @@
         <img src="../assets/percent.svg">
       </div>
       <div v-if="autoClose.active">
-        <md-input-container>
+        <div>
           <label>Closing Price</label>
-          <md-input id="auto_close" type="text" placeholder="Closing Price" v-model.number="autoClose.price"></md-input>
-          </md-input-container>
+          <input id="auto_close" type="text" placeholder="Closing Price" v-model.number="autoClose.price"></input>
+          </div>
       </div>
     </div>
 
     <div class="app-row i-center">
-      <md-checkbox v-model="strategy.active"></md-checkbox>
+      <oak-checkbox v-model="strategy.active"></oak-checkbox>
       <div v-if="!strategy.active"><small>Strategy</small></div>
       <div v-if="strategy.active">
       Auto Reverse
@@ -92,10 +92,10 @@
           <md-dialog-title>Set Stop Loss Percentage</md-dialog-title>
 
           <md-dialog-content>
-            <md-input-container>
-            <md-input id="stop_loss_percent" type="number" placeholder="Percentage" v-model.number="stopLoss.percent">
-            </md-input>
-            </md-input-container>
+            <div>
+            <input id="stop_loss_percent" type="number" placeholder="Percentage" v-model.number="stopLoss.percent">
+            </input>
+            </div>
           </md-dialog-content>
 
           <md-dialog-actions>
@@ -108,16 +108,16 @@
           <md-dialog-title>Set Trailing Stop Percentages</md-dialog-title>
 
           <md-dialog-content>
-            <md-input-container>
+            <div>
             <label>Percentage profit for trailing stop to activate:</label>
-            <md-input id="trail_active_percent" type="number" placeholder="When to start?" v-model.number="trailStop.activePercent">
-            </md-input>
-            </md-input-container>
-            <md-input-container>
+            <input id="trail_active_percent" type="number" placeholder="When to start?" v-model.number="trailStop.activePercent">
+            </input>
+            </div>
+            <div>
             <label>Percentage profit loss for stop to execute:</label>
-            <md-input id="trail_stop_percent" type="number" placeholder="When to start?" v-model.number="trailStop.stopPercent">
-            </md-input>
-            </md-input-container>
+            <input id="trail_stop_percent" type="number" placeholder="When to start?" v-model.number="trailStop.stopPercent">
+            </input>
+            </div>
           </md-dialog-content>
 
           <md-dialog-actions>
@@ -132,10 +132,10 @@
           <md-dialog-title>Set Auto Closing Percentage</md-dialog-title>
 
           <md-dialog-content>
-            <md-input-container>
-            <md-input id="auto_close_percent" type="number" placeholder="Percentage" v-model.number="autoClose.percent">
-            </md-input>
-            </md-input-container>
+            <div>
+            <input id="auto_close_percent" type="number" placeholder="Percentage" v-model.number="autoClose.percent">
+            </input>
+            </div>
           </md-dialog-content>
 
           <md-dialog-actions>
