@@ -23,15 +23,21 @@
       <div id="traderBuy" class="tradePanel">
         <trade-panel-no-data
           :asset="quoteAsset"
+          :quoteName="quote.name"
           :exKey="exKey"
-          :market="market">
+          :hasLimit="hasLimit"
+          :market="market"
+          :types="orderTypes">
         </trade-panel-no-data>
       </div>
       <div id="traderSell" class="tradePanel">
         <trade-panel-no-data
-          :asset="baseAsset"
+          :asset="quoteAsset"
+          :quoteName="quote.name"
           :exKey="exKey"
-          :market="market">
+          :hasLimit="hasLimit"
+          :market="market"
+          :types="orderTypes">
         </trade-panel-no-data>
       </div>
     </div>
@@ -92,6 +98,14 @@ export default {
     quote () {
       return this.$store.state.accounts
         .accounts[this.exKey].markets[this.marketID].quote
+    },
+    orderTypes () {
+      return require('../../../assets')
+        .exchanges[this.exKey].orderTypes
+    },
+    hasLimit () {
+      return require('../../../assets')
+        .exchanges[this.exKey].limit
     },
     dataReady: function () {
       return this.$store.state.accounts.accounts[this.exKey].marketsDataReady

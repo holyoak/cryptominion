@@ -18,7 +18,9 @@
     :userInput="activeInput">
   </component>
   <div id="test"></div>
-  <oak-modal v-if="active" @close="active = false">
+  <oak-modal v-if="active"
+    @ok="active = false"
+    @cancel="active = false">
     <!--
       you can use custom content here to overwrite
       default content

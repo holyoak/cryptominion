@@ -20,6 +20,9 @@ module.exports = `
 
           <div class="oak-modal-footer">
             <slot name="footer">
+              <button class="oak-modal-default-button" @click="$emit('cancel')">
+                Cancel
+              </button>
               <button class="oak-modal-default-button" @click="$emit('close')">
                 OK
               </button>

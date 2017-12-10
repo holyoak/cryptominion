@@ -2,34 +2,12 @@
 <div>
   <div v-if="!activeBalance">No {{ asset.name }} Available</div>
   <div v-if="activeBalance" class="app-rowrap j-even trade-panel">
-    <div class="app-col core-wrapper">
-      <div>
-        Available {{ asset.name }}: {{ activeBalance }}
-      </div>
-      <input v-model.number="newOrder.amount" placeholder="Amount" type="text">
-      <div class="app-row j-end core-buttons">
-        <div class="small-icon"
-          @click="openDialog('percentDialog')">
-          <img src="../assets/percent.svg">
-        </div>
-        <div class="small-icon"
-          @click="setAmountPercent(50)">
-          <img src="../assets/half.svg">
-        </div>
-        <div class="small-icon"
-          @click="setAmountPercent(33.33)">
-          <img src="../assets/third.svg">
-        </div>
-        <div class="small-icon"
-          @click="setAmountPercent(25)">
-          <img src="../assets/quarter.svg">
-        </div>
-        <div class="small-icon"
-          @click="setAmountPercent(20)">
-          <img src="../assets/fifth.svg">
-        </div>
-      </div>
-    </div>
+    <amount
+      @set_amount="setAmount"
+      :balance="activeBalance"
+      :name="asset.name"
+      :precision="precision">
+    </amount>
     <div class="app-col core-wrapper">
       <div>
         Price:
@@ -40,6 +18,11 @@
       Execute
     </div>
     <order-types
+      :activePrice="activePrice"
+      :hasLimit="hasLimit"
+      :types="types"
+      :quoteName="quoteName"
+      :rangeLabel="rangeLabel"
       :makerOnly="newOrder.makerOnly"
       v-on:set_maker_only="setMakerOnly"
       v-on:set_portions="setPortions"
@@ -47,43 +30,20 @@
       :portions="newOrder.portions">
     </order-types>
   </div>
-
-  <oak-modal v-if="showPercent" @close="showPercent = false">
-    <h3 slot="header">Enter percentage of {{ activeBalance }} {{ asset.name }}</h3>
-    <div slot="content">
-      <input class="oak-input-number" size="3" min="1" max="5" type="number" placeholder="Percentage" v-model="amt_percent">
-      </input> %
-    </div>
-  </oak-modal>
-
-        <md-dialog md-open-from="#custom" md-close-to="#custom" ref="percentDialog">
-          <md-dialog-title>Enter percentage of {{ activeBalance }} {{ asset.name }}</md-dialog-title>
-
-          <md-dialog-content>
-            <md-input-container>
-            <md-input id="amt_percent" type="text" placeholder="Percentage" v-model="amt_percent">
-            </md-input>
-            </md-input-container>
-          </md-dialog-content>
-
-          <md-dialog-actions>
-            <md-button class="md-primary" @click="closeDialog('percentDialog')">Cancel</md-button>
-            <md-button class="md-primary" @click="setAmountPercent(amt_percent, 'percentDialog')">Ok</md-button>
-          </md-dialog-actions>
-        </md-dialog>
-
 </div>
 </template>
 
 <script type="text/javascript">
+import Amount from './Amount'
 import OrderTypes from './OrderTypes'
 
 export default {
   components: {
+    Amount,
     OrderTypes
   },
 
-  props: ['asset', 'exKey', 'market'],
+  props: ['asset', 'exKey', 'hasLimit', 'market', 'types', 'quoteName'],
 
   data () {
     return {
@@ -97,9 +57,7 @@ export default {
         }
       },
       active: false,
-      balance: 0,
-      amt_percent: '',
-      showPercent: false
+      balance: 0
     }
   },
 
@@ -113,23 +71,28 @@ export default {
         return this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name].available
       } else return false
+    },
+
+    activePrice () {
+      return (!(isNaN(this.newOrder.price)) &&
+        this.newOrder.price !== null &&
+        this.newOrder.price !== '')
+    },
+
+    precision () {
+      return this.asset.side === 'buy'
+        ? this.market.quote.precision
+        : this.market.base.precision
+    },
+
+    rangeLabel () {
+      return this.asset.side === 'buy' ? 'below' : 'above'
     }
   },
 
   methods: {
-    openDialog (ref) {
-      this.showPercent = true
-    },
-    closeDialog (ref) {
-      this.$refs[ref].close()
-    },
-    setAmountPercent (x, ref) {
-      const p = this.asset.side === 'buy'
-        ? this.market.quote.precision
-        : this.market.base.precision
-      this.newOrder.amount = Number(((x / 100) * this.activeBalance)
-        .toFixed(p))
-      if (ref) this.closeDialog(ref)
+    setAmount (x) {
+      this.newOrder.amount = Number(x)
     },
     setMakerOnly (x) {
       console.log('setmakerOnly is ' + x)

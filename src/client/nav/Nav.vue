@@ -46,7 +46,9 @@
       <img src="../assets/gear.png">
     </div>
   </div>
-  <oak-modal v-if="showExchange" @close="showExchange = false">
+  <oak-modal v-if="showExchange"
+    @cancel="showExchange = false"
+    @ok="showExchange = false">
     <h2 slot="header">{{activeExchange}}</h2>
    <div slot="content"> You clicked {{activeExchange}} </div>
   </oak-modal>
