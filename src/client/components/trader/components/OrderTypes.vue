@@ -6,11 +6,11 @@
         v-on:click="setMakerOnly"></oak-checkbox>
       <div><small>Maker Only</small></div>
     </div>
-    <div class="app-row i-center">
+    <div class="app-row i-center" v-if="types!=null">
       <div><small>Order Type:</small></div>
       <select v-model="orderType">
-        <option v-for="option in orderTypes" v-bind:value="option.value">
-          {{ option.text }}
+        <option v-for="option in types" v-bind:value="option">
+          {{ option }}
         </option>
       </select>
     </div>
@@ -22,21 +22,32 @@
     </div>
     <oak-modal v-if="showModal"
       @ok="setPortions"
-      @cancel="showModal = false">
+      @cancel="showModal=false">
       <h3 slot="header">Split Position into Portions</h3>
       <div slot="content">
-        How many portions for the position?
-        <input class="oak-input-number" size=  "3" min="1" max="100" type="number"   placeholder="Portions" v-model="amt_percent">
-        </input>
-        The range should start
-        <oak-checkbox
-        :checked="portions.active"
-        v-on:click="portionStart='around'">
-        </oak-checkbox> around
-        <oak-checkbox
-        :checked="portions.active"
-        v-on:click="portionStart='above'">
-        </oak-checkbox> above
+        <p>How many portions for the position?</p>
+        <p><small>(max 10)</small></p>
+        <input class="oak-input-number" min="1" max="10" type="number"   placeholder="Portions" v-model="localPortions.portions">
+        <p>The range should start</p>
+          <div class="app-col">
+            around<oak-checkbox
+            :checked="rangeAround"
+            v-on:click="rangeAround=!rangeAround">
+            </oak-checkbox>
+            {{rangeLabel}}<oak-checkbox
+            :checked="!rangeAround"
+            v-on:click="rangeAround=!rangeAround">
+            </oak-checkbox>
+          </div>
+        <p>the opening price and span</p>
+        <div v-if="!setRangePercent" class="app-row j-between">
+          <div class="mini-button" @click="setRangePercent=true">%</div>
+          <input class="oak-input-number" type="number" placeholder="Range" v-model="localPortions.range"> {{quoteName}}
+        </div>
+        <div v-if="setRangePercent" class="app-row j-between">
+          <div class="mini-button" @click="setRangePercent=false">{{quoteName}}</div>
+          <input class="oak-input-number" type="number" min="1" max="100" placeholder="Range" v-model="localPortions.rangePercent"> %
+        </div>
       </div>
     </oak-modal>
 </div>
@@ -46,19 +57,25 @@
 
 export default {
 
-  props: [ 'makerOnly', 'type', 'portions' ],
+  props: [ 'makerOnly', 'type', 'portions', 'rangeLabel', 'types', 'quoteName' ],
 
   data () {
     return {
-      orderTypes: [
-        { text: 'Fill or Kill', value: 'FOK' },
-        { text: 'Good til Cancel', value: 'GTC' },
-        { text: 'Now or Cancel', value: 'IOC' }
-      ],
       orderType: 'GTC',
-      portionStart: 'around',
-      showModal: false
+      rangeAround: 'around',
+      setRangePercent: false,
+      showModal: false,
+      localPortions: {
+        active: false,
+        portions: 3,
+        range: 0.01,
+        rangePercent: 1
+      }
     }
+  },
+
+  mounted () {
+    this.localPortions = this.portions
   },
 
   methods: {
@@ -79,5 +96,16 @@ export default {
 <style scoped>
 .order-types{
   width: 100%;
+}
+
+.mini-button{
+  cursor: pointer;
+  background-color: #3C4BA7;
+  color: #BFA9A9;
+}
+
+.portions{
+  margin: 0rem;
+  padding: 0rem;
 }
 </style>

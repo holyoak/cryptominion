@@ -18,6 +18,9 @@
       Execute
     </div>
     <order-types
+      :types="types"
+      :quoteName="quoteName"
+      :rangeLabel="rangeLabel"
       :makerOnly="newOrder.makerOnly"
       v-on:set_maker_only="setMakerOnly"
       v-on:set_portions="setPortions"
@@ -38,7 +41,7 @@ export default {
     OrderTypes
   },
 
-  props: ['asset', 'exKey', 'market'],
+  props: ['asset', 'exKey', 'market', 'types', 'quoteName'],
 
   data () {
     return {
@@ -72,6 +75,10 @@ export default {
       return this.asset.side === 'buy'
         ? this.market.quote.precision
         : this.market.base.precision
+    },
+
+    rangeLabel () {
+      return this.asset.side === 'buy' ? 'below' : 'above'
     }
   },
 
