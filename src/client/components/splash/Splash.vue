@@ -17,12 +17,19 @@
     :label="activeLabel"
     :userInput="activeInput">
   </component>
-  <div id="test">
-  </div>
+  <div id="test"></div>
+  <oak-modal v-if="active" @close="active = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <h3 slot="header">A Custom header</h3>
+  </oak-modal>
 </div>
 </template>
 
 <script>
+// import oak from '../../../../oak'
 import TextInput from './TextInput'
 import OtherTextInput from './TextInput2'
 import Practice from './drawing.svg.js'
