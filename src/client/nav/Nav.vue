@@ -19,7 +19,7 @@
         <img src="../assets/exchanges/poloniex.jpeg">
       </div>
     </div>
-    <div class="icon-nav-small"
+<!--     <div class="icon-nav-small"
       @click="openDialog('fabDialog')">
       <img src="../assets/assets/ETH.png">
     </div>
@@ -38,7 +38,7 @@
     <div class="icon-nav-small"
       @click="openDialog('fabDialog')">
       <img src="../assets/assets/AEON.png">
-    </div>
+    </div> -->
   </div>
   <div id="settings">
     <div class="icon-nav-small"
@@ -71,6 +71,7 @@ export default {
     },
     openDialog (ref) {
       this.$refs[ref].open()
+      document.getElementById('practice').style.fill = 'red'
     },
     openMyDialog (ref) {
       document.getElementById('modl_root').style.display = 'block'

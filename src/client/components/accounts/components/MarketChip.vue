@@ -29,10 +29,10 @@ export default {
       }
     },
     baseImage: function () {
-      return require('../../../assets/assets/XMR.svg')
+      return require('../../../assets/assets/AEON.svg')
     },
     quoteImage: function () {
-      return require('../../../assets/assets/XMR.svg')
+      return require('../../../assets/assets/EUR.svg')
     }
   },
 
