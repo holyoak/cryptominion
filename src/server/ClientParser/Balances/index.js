@@ -8,14 +8,14 @@ module.exports = {
   parse: parse
 }
 /**
- * Normalize market utility data
+ * Normalize client balance data
  * @param  {Client}   client      ccxt exchange client
  * @param  {AppID}    ID          App exchange key
  * @return {Object}               app state fragment
  */
 function parse (client, ID) {
   return new Promise(function (resolve, reject) {
-    client.loadMarkets()
+    client.fetchBalance()
       .then((data) => {
         resolve(parseData(data, ID))
       })
@@ -30,21 +30,21 @@ function parse (client, ID) {
  */
 function parseData (data, ID) {
   const res = {
-    flag: 'load markets',
+    flag: 'load balances',
     data: { id: ID }
   }
   switch (ID) {
     case 'gdax':
-      res.data.markets = Gdax.parseMarkets(data)
+      res.data.balances = Gdax.parseBalances(data)
       return res
     case 'poloniex':
-      res.data.markets = Polo.parseMarkets(data)
+      res.data.balances = Polo.parseBalances(data)
       return res
     case 'bittrex':
-      res.data.markets = Bittrex.parseMarkets(data)
+      res.data.balances = Bittrex.parseBalances(data)
       return res
     default:
-      const msg = '/Parser/Markets switch condition not met'
+      const msg = '/ClientParser/Balances switch condition not met'
       console.error(chalk.red.bold(msg))
       return ({ err: 1, m: msg })
   }

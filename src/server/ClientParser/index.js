@@ -30,7 +30,7 @@ function input (message, callback) {
       }
       break
     default:
-      const msg = '/server/Parser switch condition not met'
+      const msg = '/server/ClientParser switch condition not met'
       console.log(msg)
       callback(msg)
       break

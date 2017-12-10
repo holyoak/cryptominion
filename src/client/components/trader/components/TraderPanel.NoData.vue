@@ -18,6 +18,8 @@
       Execute
     </div>
     <order-types
+      :activePrice="activePrice"
+      :hasLimit="hasLimit"
       :types="types"
       :quoteName="quoteName"
       :rangeLabel="rangeLabel"
@@ -41,7 +43,7 @@ export default {
     OrderTypes
   },
 
-  props: ['asset', 'exKey', 'market', 'types', 'quoteName'],
+  props: ['asset', 'exKey', 'hasLimit', 'market', 'types', 'quoteName'],
 
   data () {
     return {
@@ -69,6 +71,12 @@ export default {
         return this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name].available
       } else return false
+    },
+
+    activePrice () {
+      return (!(isNaN(this.newOrder.price)) &&
+        this.newOrder.price !== null &&
+        this.newOrder.price !== '')
     },
 
     precision () {

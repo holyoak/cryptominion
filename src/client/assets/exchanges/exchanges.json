@@ -5,6 +5,7 @@
     "color": "#017AFD",
     "icon": "./bittrex.jpeg",
     "name": "Bittrex",
+    "limit": false,
     "orderTypes": null
   },
   "gdax": {
@@ -13,6 +14,7 @@
     "color": "#45518C",
     "icon": "./gdax.jpeg",
     "name": "GDAX",
+    "limit": true,
     "orderTypes": ["Fill or Kill","Good til Cancel","Now or Cancel"]
   },
   "poloniex": {
@@ -21,6 +23,7 @@
     "color": "#216B44",
     "icon": "./poloniex.jpeg",
     "name": "Poloniex",
+    "limit": true,
     "orderTypes": null
   },
   "default": {
@@ -29,6 +32,7 @@
     "color": "#717171",
     "icon": "./default.jpeg",
     "name": "",
+    "limit": false,
     "orderTypes": null
   }
 }

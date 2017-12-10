@@ -1,6 +1,6 @@
 <template>
 <div class="app-rowrap j-even order-types">
-    <div class="app-row i-center">
+    <div class="app-row i-center" v-if="hasLimit">
       <oak-checkbox
         :checked="makerOnly"
         v-on:click="setMakerOnly"></oak-checkbox>
@@ -14,7 +14,7 @@
         </option>
       </select>
     </div>
-    <div class="app-row i-center">
+    <div class="app-row i-center" v-if="activePrice">
       <oak-checkbox
         :checked="portions.active"
         @click="setPortions"></oak-checkbox>
@@ -57,7 +57,7 @@
 
 export default {
 
-  props: [ 'makerOnly', 'type', 'portions', 'rangeLabel', 'types', 'quoteName' ],
+  props: [ 'activePrice', 'hasLimit', 'makerOnly', 'type', 'portions', 'rangeLabel', 'types', 'quoteName' ],
 
   data () {
     return {

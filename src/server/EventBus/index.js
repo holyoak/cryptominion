@@ -1,5 +1,5 @@
 // const DataStreams = require('../DataStreams')
-const parse = require('../Parser')
+const parse = require('../ClientParser')
 
 module.exports = {
   init: init
