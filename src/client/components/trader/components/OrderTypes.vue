@@ -17,9 +17,28 @@
     <div class="app-row i-center">
       <oak-checkbox
         :checked="portions.active"
-        v-on:click="setPortions"></oak-checkbox>
+        @click="setPortions"></oak-checkbox>
       <div><small>Portions</small></div>
     </div>
+    <oak-modal v-if="showModal"
+      @ok="setPortions"
+      @cancel="showModal = false">
+      <h3 slot="header">Split Position into Portions</h3>
+      <div slot="content">
+        How many portions for the position?
+        <input class="oak-input-number" size=  "3" min="1" max="100" type="number"   placeholder="Portions" v-model="amt_percent">
+        </input>
+        The range should start
+        <oak-checkbox
+        :checked="portions.active"
+        v-on:click="portionStart='around'">
+        </oak-checkbox> around
+        <oak-checkbox
+        :checked="portions.active"
+        v-on:click="portionStart='above'">
+        </oak-checkbox> above
+      </div>
+    </oak-modal>
 </div>
 </template>
 
@@ -36,7 +55,9 @@ export default {
         { text: 'Good til Cancel', value: 'GTC' },
         { text: 'Now or Cancel', value: 'IOC' }
       ],
-      orderType: 'GTC'
+      orderType: 'GTC',
+      portionStart: 'around',
+      showModal: false
     }
   },
 
@@ -45,7 +66,9 @@ export default {
       this.$emit('set_maker_only', !x)
     },
     setPortions: function (x) {
-      this.$emit('set_portions', !x)
+      console.log('settem')
+      if (x === true) this.showModal = true
+      this.$emit('set_portions', x)
     }
 
   }
