@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import { App } from './app'
-import router from './router'
 import store from './store'
 require('../../oak')
 
@@ -13,7 +12,6 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   store,
   template: '<App/>',
   components: { App }

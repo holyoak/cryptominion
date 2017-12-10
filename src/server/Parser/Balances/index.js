@@ -1,7 +1,8 @@
 'use strict'
 const chalk = require('chalk')
+const Bittrex = require('../bittrex')
 const Gdax = require('../gdax')
-const Polo = require('../gdax')
+const Polo = require('../poloniex')
 
 module.exports = {
   parse: parse
@@ -40,7 +41,7 @@ function parseData (data, ID) {
       res.data.balances = Polo.parseBalances(data)
       return res
     case 'bittrex':
-      res.data.balances = Polo.parseBalances(data)
+      res.data.balances = Bittrex.parseBalances(data)
       return res
     default:
       const msg = '/Parser/Balances switch condition not met'

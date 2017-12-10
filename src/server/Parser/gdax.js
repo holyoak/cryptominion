@@ -29,7 +29,6 @@ function parseBalances (data) {
  * @return {Object}                     normalized data
  */
 function parseMarkets (data) {
-  console.log('Into gdax.parseMarkets')
   const res = {}
   for (const x in data) {
     res[data[x].id] = {
