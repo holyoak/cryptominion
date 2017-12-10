@@ -1,5 +1,6 @@
 'use strict'
 const config = require('../config')
+const dialog = require('./oak.dialog.html.js')
 // Render Initial HTML
 module.exports = function () {
   return `
@@ -18,6 +19,7 @@ module.exports = function () {
         <link rel="stylesheet" type="text/css" href="./static/vue-material.css">
       </head>
       <body>
+        ${dialog}
         <div id="app"></div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(config.initialState)};
