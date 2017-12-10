@@ -7,15 +7,15 @@
         <img src="../assets/logo.svg">
       </div>
       <div class="icon-nav-small"
-        @click="openMyDialog('fabDialog')">
+        @click="openDialog('Bittrex')">
         <img src="../assets/exchanges/bittrex.jpeg">
       </div>
       <div class="icon-nav-small"
-        @click="openDialog('fabDialog')">
+        @click="openDialog('GDAX')">
         <img src="../assets/exchanges/gdax.jpeg">
       </div>
       <div class="icon-nav-small"
-        @click="openDialog('fabDialog')">
+        @click="openDialog('Poloniex')">
         <img src="../assets/exchanges/poloniex.jpeg">
       </div>
     </div>
@@ -42,20 +42,14 @@
   </div>
   <div id="settings">
     <div class="icon-nav-small"
-      @click="openDialog('fabDialog')">
+      @click="openDialog('Settings')">
       <img src="../assets/gear.png">
     </div>
   </div>
-  <md-dialog md-open-from="#custom" md-close-to="#custom" ref="fabDialog">    <md-dialog-title>FAB Navigation Stub</md-dialog-title>
-    <md-dialog-content>
-      Floating action button navigation not built out yet
-    </md-dialog-content>
-    <md-dialog-actions>
-      <md-button class="md-primary" @click="closeDialog('fabDialog')">
-        OK
-      </md-button>
-    </md-dialog-actions>
-  </md-dialog>
+  <oak-modal v-if="showExchange" @close="showExchange = false">
+    <h2 slot="header">{{activeExchange}}</h2>
+   <div slot="content"> You clicked {{activeExchange}} </div>
+  </oak-modal>
 </div>
 </template>
 
@@ -63,18 +57,20 @@
 
 export default {
 
-  data () { return {} },
+  data () {
+    return {
+      activeExchange: null,
+      showExchange: false
+    }
+  },
 
   methods: {
     closeDialog (ref) {
       this.$refs[ref].close()
     },
     openDialog (ref) {
-      this.$refs[ref].open()
-      document.getElementById('practice').style.fill = 'red'
-    },
-    openMyDialog (ref) {
-      document.getElementById('modl_root').style.display = 'block'
+      this.activeExchange = ref
+      this.showExchange = true
     },
     setNavHome () {
       this.$store.commit('SET_NAV', {

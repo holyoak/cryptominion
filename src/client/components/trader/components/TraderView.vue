@@ -10,13 +10,13 @@
       </div>
     <div id="tradeHeader" md-row class="app-row j-even">
       <div class="icon-small">
-        <img v-bind:src="quoteIcon">
+        <img v-bind:src="baseIcon">
       </div>
       <h2>{{ theme.name }}</h2>
       <div v-if="streamReady">Last Price: {{ lastPrice }} {{ market.quote.name }}  </div>
       <h2>{{ market.id }}</h2>
       <div class="icon-small">
-        <img v-bind:src="baseIcon">
+        <img v-bind:src="quoteIcon">
       </div>
     </div>
     <div class="app-row" v-if="!streamReady">
@@ -150,16 +150,16 @@ export default {
     },
     baseIcon: function () {
       try {
-        return require('../../../assets/assets/' + this.base.name + '.png')
+        return require('../../../assets/assets/' + this.base.name + '.svg')
       } catch (ex) {
-        return require('../../../assets/assets/XMR.svg')
+        return require('../../../assets/assets/default.svg')
       }
     },
     quoteIcon: function () {
       try {
-        return require('../../../assets/assets/' + this.quote.name + '.png')
+        return require('../../../assets/assets/' + this.quote.name + '.svg')
       } catch (ex) {
-        return require('../../../assets/assets/XMR.svg')
+        return require('../../../assets/assets/default.svg')
       }
     },
     tickerKey: function () {

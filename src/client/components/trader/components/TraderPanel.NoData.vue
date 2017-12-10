@@ -47,6 +47,15 @@
       :portions="newOrder.portions">
     </order-types>
   </div>
+
+  <oak-modal v-if="showPercent" @close="showPercent = false">
+    <h3 slot="header">Enter percentage of {{ activeBalance }} {{ asset.name }}</h3>
+    <div slot="content">
+      <input class="oak-input-number" size="3" min="1" max="5" type="number" placeholder="Percentage" v-model="amt_percent">
+      </input> %
+    </div>
+  </oak-modal>
+
         <md-dialog md-open-from="#custom" md-close-to="#custom" ref="percentDialog">
           <md-dialog-title>Enter percentage of {{ activeBalance }} {{ asset.name }}</md-dialog-title>
 
@@ -89,7 +98,8 @@ export default {
       },
       active: false,
       balance: 0,
-      amt_percent: ''
+      amt_percent: '',
+      showPercent: false
     }
   },
 
@@ -108,7 +118,7 @@ export default {
 
   methods: {
     openDialog (ref) {
-      this.$refs[ref].open()
+      this.showPercent = true
     },
     closeDialog (ref) {
       this.$refs[ref].close()

@@ -14,10 +14,12 @@ module.exports = {
 function parseBalances (data) {
   const res = {}
   for (const x in data.total) {
-    res[x] = {
-      id: x,
-      balance: data.total[x],
-      available: data.free[x]
+    if (Number(data.total[x]) > 0) {
+      res[x] = {
+        id: x,
+        balance: data.total[x],
+        available: data.free[x]
+      }
     }
   }
   return res
@@ -29,7 +31,6 @@ function parseBalances (data) {
  * @return {Object}                     normalized data
  */
 function parseMarkets (data) {
-  console.log('Into poloniex.parseMarkets')
   const res = {}
   for (const x in data) {
     const id = normalizeID(data[x].id)
