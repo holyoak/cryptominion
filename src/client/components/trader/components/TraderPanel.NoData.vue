@@ -22,10 +22,12 @@
       :hasLimit="hasLimit"
       :types="types"
       :quoteName="quoteName"
+      :range="range"
       :rangeLabel="rangeLabel"
-      :makerOnly="newOrder.makerOnly"
-      v-on:set_maker_only="setMakerOnly"
+      :limitOnly="newOrder.limitOnly"
       v-on:set_portions="setPortions"
+      v-on:toggle_limit_only="toggleLimitOnly"
+      v-on:toggle_portions="togglePortions"
       :type="newOrder.type"
       :portions="newOrder.portions">
     </order-types>
@@ -36,6 +38,7 @@
 <script type="text/javascript">
 import Amount from './Amount'
 import OrderTypes from './OrderTypes'
+import userConfig from '../../../app/userConfig.json'
 
 export default {
   components: {
@@ -49,11 +52,14 @@ export default {
     return {
       newOrder: {
         amount: '',
-        price: null,
-        makerOnly: false,
+        price: 100,
+        limitOnly: false,
         type: '',
         portions: {
-          active: false
+          active: false,
+          around: true,
+          portions: null,
+          rangePercent: null
         }
       },
       active: false,
@@ -74,9 +80,10 @@ export default {
     },
 
     activePrice () {
-      return (!(isNaN(this.newOrder.price)) &&
+      if (!(isNaN(this.newOrder.price)) &&
         this.newOrder.price !== null &&
-        this.newOrder.price !== '')
+        this.newOrder.price !== '') return this.newOrder.price
+      else return false
     },
 
     precision () {
@@ -87,22 +94,53 @@ export default {
 
     rangeLabel () {
       return this.asset.side === 'buy' ? 'below' : 'above'
+    },
+
+    range () {
+      if (!(isNaN(this.newOrder.price)) &&
+        !(isNaN(this.newOrder.portions.rangePercent))) {
+        const step = Number(this.newOrder.portions.rangePercent / 100)
+        if (this.newOrder.portions.around === true) {
+          return {
+            max: this.newOrder.price * (Number(1 + (step / 2))),
+            min: this.newOrder.price * (Number(1 - (step / 2)))
+          }
+        } else {
+          if (this.asset.side === 'buy') {
+            return {
+              max: this.newOrder.price,
+              min: this.newOrder.price * (Number(1 - step))
+            }
+          } else {
+            return {
+              max: this.newOrder.price * (Number(1 + step)),
+              min: this.newOrder.price
+            }
+          }
+        }
+      } else return false
     }
   },
 
   methods: {
-    setAmount (x) {
-      this.newOrder.amount = Number(x)
-    },
-    setMakerOnly (x) {
-      console.log('setmakerOnly is ' + x)
-      this.newOrder.makerOnly = !x
-    },
-    setPortions (x) {
-      console.log('setPortions is ' + x)
-      this.newOrder.portions.active = !x
-    },
-    setPrice (x) { this.newOrder.price = Number(x) }
+    setAmount (x) { this.newOrder.amount = Number(x) },
+    setPortions (x) { this.newOrder.portions = x },
+    setPrice (x) { this.newOrder.price = Number(x) },
+    toggleLimitOnly (x) { this.newOrder.limitOnly = !x },
+    togglePortions (x) { this.newOrder.portions.active = !x }
+  },
+
+  created () {
+    if (userConfig.orders.portions) {
+      // this hack is going to be fatal in Android
+      this.newOrder.portions = JSON.parse(JSON.stringify(userConfig.orders.portions))
+    }
+    if (userConfig.orders.limitOnly) {
+      this.newOrder.limitOnly = userConfig.orders.limitOnly
+    }
+    if (userConfig.orders.type) {
+      this.newOrder.type = userConfig.orders.type
+    }
   }
 }
 </script>

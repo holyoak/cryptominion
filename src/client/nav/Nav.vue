@@ -6,7 +6,7 @@
         @click="setNavHome">
         <img src="../assets/logo.svg">
       </div>
-      <div class="icon-nav-small"
+<!--       <div class="icon-nav-small"
         @click="openDialog('Bittrex')">
         <img src="../assets/exchanges/bittrex.jpeg">
       </div>
@@ -17,7 +17,7 @@
       <div class="icon-nav-small"
         @click="openDialog('Poloniex')">
         <img src="../assets/exchanges/poloniex.jpeg">
-      </div>
+      </div> -->
     </div>
 <!--     <div class="icon-nav-small"
       @click="openDialog('fabDialog')">

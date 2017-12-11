@@ -32,7 +32,7 @@
       </div>
       <div id="traderSell" class="tradePanel">
         <trade-panel-no-data
-          :asset="quoteAsset"
+          :asset="baseAsset"
           :quoteName="quote.name"
           :exKey="exKey"
           :hasLimit="hasLimit"
