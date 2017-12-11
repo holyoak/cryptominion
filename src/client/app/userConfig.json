@@ -2,10 +2,15 @@
   "orders": {
     "stop_loss": 0.02,
     "trail_stop": 0.02,
-    "taker": false,
+    "limitOnly": true,
     "type": "GTC",
-    "portions": 10
-    },
+    "portions": {
+      "active": true,
+      "around": false,
+      "portions": 10,
+      "rangePercent": 1
+    }
+  },
   "assets": [
     "AEON",
     "ARK",

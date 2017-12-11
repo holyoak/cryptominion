@@ -1,6 +1,7 @@
 <template>
 <div class="app-col j-center i-center">
   Splash Screen
+  <oak-input :value="inputTest" @myEmit="onMyEmit"></oak-input>
   <oak-checkbox
     :checked="active"
     @click="onClickChild">
@@ -47,6 +48,7 @@ export default {
   data () {
     return {
       active: false,
+      inputTest: 'inputTest',
       practice: Practice,
       currentView: 'text-input',
       label: 'Input Component Label',
@@ -75,6 +77,10 @@ export default {
   methods: {
     onClickChild (value) {
       this.active = value
+    },
+
+    onMyEmit (x) {
+      this.inputTest = x
     },
 
     onClickButton () {
