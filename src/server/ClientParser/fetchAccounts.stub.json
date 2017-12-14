@@ -8,7 +8,7 @@
           "id": "BTC-USD",
           "base": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -20,7 +20,7 @@
           "id": "ETH-USD",
           "base": {
             "name": "ETH",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -31,7 +31,7 @@
           "id": "LTC-USD",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -42,25 +42,25 @@
           "id": "ETH-BTC",
           "base": {
             "name": "ETH",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         },
         "LTC-BTC": {
           "id": "LTC-BTC",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         }
       },
       "balances": {
@@ -86,7 +86,7 @@
           "id": "BTC-USD",
           "base": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -98,7 +98,7 @@
           "id": "ETH-USD",
           "base": {
             "name": "ETH",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -109,7 +109,7 @@
           "id": "LTC-USD",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
@@ -120,25 +120,25 @@
           "id": "ETH-BTC",
           "base": {
             "name": "ETH",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         },
         "LTC-BTC": {
           "id": "LTC-BTC",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         }
       },
       "balances": {
@@ -151,8 +151,8 @@
           "available": 10.123456782
         },
         "LTC": {
-          "balance": 10,
-          "available": 52
+          "balance": 100,
+          "available": 100
         }
       }
     },
@@ -164,69 +164,69 @@
           "id": "BTC-USD",
           "base": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8},
+          "precision": 6},
         "ETH-USD": {
           "id": "LTC-USD",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8},
+          "precision": 6},
         "LTC-USD": {
           "id": "LTC-USD",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8},
+          "precision": 6},
         "XMR-USD": {
           "id": "XMR-USD",
           "base": {
             "name": "XMR",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "USD",
-            "precision": 2
+            "precision": 6
           },
-          "precision": 8   },
+          "precision": 6   },
         "LTC-BTC": {
           "id": "LTC-BTC",
           "base": {
             "name": "LTC",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         },
         "XMR-BTC": {
           "id": "XMR-BTC",
           "base": {
             "name": "XMR",
-            "precision": 8
+            "precision": 6
           },
           "quote": {
             "name": "BTC",
-            "precision": 8
+            "precision": 6
           },
-          "precision": 8
+          "precision": 6
         }
       },
       "balances": {

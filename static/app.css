@@ -37,7 +37,7 @@
   display: flex;
   flex-flow: row nowrap;
 }
-.app-rowrap{
+.app-row .wrap{
   display: flex;
   flex-flow: row wrap;
 }
@@ -48,6 +48,10 @@
 .app-col .wrap{
   display: flex;
   flex-flow: column wrap;
+}
+.button{
+  cursor: pointer;
+  border-radius: .5em;
 }
 .flex{
   flex: 1 0 auto;
@@ -63,6 +67,14 @@
 }
 .j-even{
   justify-content: space-evenly;
+}
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inputCryptoNumber{
+  width: 16rem;
 }
 .i-baseline{
   align-items: baseline;
@@ -93,6 +105,10 @@
 .icon-small{
   width: 3rem;
   height: 3rem;
+}
+.icon-tiny{
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .left{
   align-items: left;

@@ -4,17 +4,25 @@
   <div v-if="activeBalance" class="app-rowrap j-even trade-panel">
     <amount
       @set_amount="setAmount"
+      :amount="newOrder.amount"
       :balance="activeBalance"
+      :buy="asset.side=='buy'"
       :name="asset.name"
-      :precision="precision">
+      :pair="asset.pair"
+      :precision="precision"
+      :activePrice="activePrice"
+      :theme="theme">
     </amount>
-    <div class="app-col core-wrapper">
+    <div class="app-col">
       <div>
         Price:
       </div>
       <input v-model.number="newOrder.price" placeholder="Price" type="text">
     </div>
-    <div class="exec">
+    <div v-if="execReady" class="exec" @click="exec">
+      Execute
+    </div>
+    <div v-if="!execReady" class="no-exec">
       Execute
     </div>
     <order-types
@@ -28,6 +36,7 @@
       v-on:set_portions="setPortions"
       v-on:toggle_limit_only="toggleLimitOnly"
       v-on:toggle_portions="togglePortions"
+      :theme="theme"
       :type="newOrder.type"
       :portions="newOrder.portions">
     </order-types>
@@ -46,7 +55,7 @@ export default {
     OrderTypes
   },
 
-  props: ['asset', 'exKey', 'hasLimit', 'market', 'types', 'quoteName'],
+  props: ['asset', 'exKey', 'hasLimit', 'market', 'types', 'theme', 'quoteName'],
 
   data () {
     return {
@@ -69,13 +78,16 @@ export default {
 
   computed: {
     activeBalance () {
+      // if asset balance exists in state and > 0
       if (this.$store.state.accounts.accounts[this.exKey] &&
         this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name] &&
         this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name].available > 0) {
+      // show me the balance
         return this.$store.state.accounts.accounts[this.exKey]
           .balances[this.asset.name].available
+      // or tell me it aint there
       } else return false
     },
 
@@ -84,6 +96,22 @@ export default {
         this.newOrder.price !== null &&
         this.newOrder.price !== '') return this.newOrder.price
       else return false
+    },
+
+    execReady () {
+      // main input mask before trade execution
+      const res = { ready: true }
+      if (!this.activePrice) res.ready = false
+      if (isNaN(this.newOrder.amount)) res.ready = false
+      if (this.newOrder.amount === null) res.ready = false
+      if (Number(this.newOrder.amount) <= 0) res.ready = false
+      if (isNaN(this.newOrder.price)) res.ready = false
+      // over your balance
+      if (Number(this.newOrder.amount) > Number(this.activeBalance)) {
+        res.ready = false
+      }
+      // TODO min order size, min portion order size, min size limit order
+      return res.ready
     },
 
     precision () {
@@ -123,6 +151,10 @@ export default {
   },
 
   methods: {
+    exec () {
+      const res = { flag: 'create position', data: this.newOrder }
+      this.$store.state.nav.socket.send(JSON.stringify(res))
+    },
     setAmount (x) { this.newOrder.amount = Number(x) },
     setPortions (x) { this.newOrder.portions = x },
     setPrice (x) { this.newOrder.price = Number(x) },
@@ -131,6 +163,13 @@ export default {
   },
 
   created () {
+    this.newOrder.userID = this.$store.state.accounts.id
+    this.newOrder.exKey = this.exKey
+    this.newOrder.marketID = this.market.id
+    this.newOrder.precision = this.market.base.precision
+    this.newOrder.side = this.asset.side
+    this.newOrder.symbol = this.market.base.name + '/' +
+      this.market.quote.name
     if (userConfig.orders.portions) {
       // this hack is going to be fatal in Android
       this.newOrder.portions = JSON.parse(JSON.stringify(userConfig.orders.portions))

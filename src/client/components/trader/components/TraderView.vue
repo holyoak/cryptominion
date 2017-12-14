@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div v-if="!dataReady" class="lower">Fetching Data...</div>
-  <div id="traderAccount" class="lower"
+  <div v-if="!dataReady">Fetching Data...</div>
+  <div id="traderAccount"
     v-if="dataReady"
     v-bind:style="{ color:theme.accent,   backgroundColor: theme.color }">
       <div class="trade-icon"
@@ -20,16 +20,6 @@
       </div>
     </div>
     <div class="app-row" v-if="!streamReady">
-      <div id="traderBuy" class="tradePanel">
-        <trade-panel-no-data
-          :asset="quoteAsset"
-          :quoteName="quote.name"
-          :exKey="exKey"
-          :hasLimit="hasLimit"
-          :market="market"
-          :types="orderTypes">
-        </trade-panel-no-data>
-      </div>
       <div id="traderSell" class="tradePanel">
         <trade-panel-no-data
           :asset="baseAsset"
@@ -37,7 +27,19 @@
           :exKey="exKey"
           :hasLimit="hasLimit"
           :market="market"
-          :types="orderTypes">
+          :types="orderTypes"
+          :theme="theme">
+        </trade-panel-no-data>
+      </div>
+      <div id="traderBuy" class="tradePanel">
+        <trade-panel-no-data
+          :asset="quoteAsset"
+          :quoteName="quote.name"
+          :exKey="exKey"
+          :hasLimit="hasLimit"
+          :market="market"
+          :types="orderTypes"
+          :theme="theme">
         </trade-panel-no-data>
       </div>
     </div>
@@ -150,13 +152,15 @@ export default {
     baseAsset: function () {
       return {
         side: 'sell',
-        name: this.base.name
+        name: this.base.name,
+        pair: this.quote.name
       }
     },
     quoteAsset: function () {
       return {
         side: 'buy',
-        name: this.quote.name
+        name: this.quote.name,
+        pair: this.base.name
       }
     },
     exIcon: function () {

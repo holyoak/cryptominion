@@ -5,3 +5,7 @@ export const initNav = ({ commit }, data) => {
 export const setNav = ({ commit }, data) => {
   commit('SET_NAV', data)
 }
+
+export const setSocket = ({ commit }, data) => {
+  commit('SET_SOCKET', data)
+}

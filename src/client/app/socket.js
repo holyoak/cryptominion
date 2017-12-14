@@ -9,7 +9,7 @@ export default function (port, auth, config) {
     const user = {
       flag: 'open session',
       user: {
-        id: 1,
+        id: config.id,
         assets: config.assets,
         auth: auth
       }

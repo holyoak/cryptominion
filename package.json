@@ -5,7 +5,7 @@
   "author": "holyoak",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch src/server src/server",
+    "dev": "nodemon --watch src/server --watch static src/server",
     "datastreams": "node src/server/DataStreams",
     "start": "node src/server/DataStreams & node build/dev-server.js",
     "build": "node build/build.js",
