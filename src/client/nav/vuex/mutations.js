@@ -15,6 +15,10 @@ export default {
   SET_NAV (state, payload) {
     state.nav = payload
     setCookies(payload)
+  },
+
+  SET_SOCKET (state, payload) {
+    state.socket = payload
   }
 }
 

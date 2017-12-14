@@ -19,11 +19,12 @@
         :checked="portions.active"
         v-on:click="togglePortions"></oak-checkbox>
       <div v-if="nonActive"><small>Portions</small></div>
-    </div>
-    <div v-if="!nonActive" class="app-col">
-        <small>{{portions.portions}} Portions</small>
-        <small>Price min:{{range.min}}, max:{{range.max}}</small>
-        <div class="faux-button" @click="modalView">Edit</div>
+      <div v-if="!nonActive" class="app-col button"
+        @click="modalView"
+        v-bind:style="{ color:theme.accent,   backgroundColor: theme.color }">
+          <small>{{portions.portions}} orders from</small>
+          <small>min:{{range.min}}, max:{{range.max}}</small>
+      </div>
     </div>
     <oak-modal v-if="showModal"
       @ok="emitPortions"
@@ -75,6 +76,7 @@ export default {
     'portions',
     'range',
     'rangeLabel',
+    'theme',
     'types',
     'quoteName' ],
 

@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 export default {
   INIT_STATE (state, payload) {
+    state.id = payload.config.id
     for (const exchangeID in payload.auth.accounts) {
       state.accounts[exchangeID] = {
         id: exchangeID,

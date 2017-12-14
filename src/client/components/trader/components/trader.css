@@ -1,5 +1,5 @@
 .core-wrapper{
-   margin: 0em .5em 0em .5em;
+   margin: 1em .5em 1em .5em;
 }
 .core-input{
    position: absolute;
@@ -11,6 +11,12 @@
 .exec{
   border: solid;
   cursor: pointer;
+  margin: 1em;
+  width: 100%;
+}
+.no-exec{
+  border: solid;
+  cursor: default;
   margin: 1em;
   width: 100%;
 }
@@ -31,11 +37,6 @@
   flex: 1;
   text-align: right;
 }
-.spaced{
-  justify-content: space-around;
-}
-.trade-panel{
-}
 .userInput{
   padding: 1em;
   flex: 0;
@@ -52,14 +53,23 @@
 }
 #traderBuy {
   background-color: #5AAC5E;
+  margin-left: .25rem;
+}
+#traderBuy .exec {
+  background-color: #1CCF24;
 }
 #traderSell {
   background-color: #A33643;
+  margin-right: .25rem;
+}
+#traderSell .exec {
+  background-color: #FF2D24;
 }
 .tradePanel{
   color: black;
   flex: 1 0 auto;
   max-width: 50%;
+  padding: 1em .5em 1em .5em;
 }
 .trade-icon{
   border: solid;

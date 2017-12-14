@@ -1,4 +1,3 @@
-// register global gui components
 import Vue from 'vue'
 
 Vue.component('oak-input', {

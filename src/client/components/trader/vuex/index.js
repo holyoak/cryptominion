@@ -2,9 +2,7 @@ import * as actions from './actions'
 import mutations from './mutations'
 
 const state = {
-  nav: {},
-  socket: {},
-  theme: {}
+  positions: {}
 }
 
 export default {

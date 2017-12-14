@@ -1,14 +1,16 @@
 {
+  "id": 1032,
   "orders": {
+    "baseActive": true,
     "stop_loss": 0.02,
     "trail_stop": 0.02,
     "limitOnly": true,
-    "type": "GTC",
+    "type": "Good til Cancel",
     "portions": {
       "active": true,
       "around": false,
-      "portions": 10,
-      "rangePercent": 1
+      "portions": 3,
+      "rangePercent": 3
     }
   },
   "assets": [

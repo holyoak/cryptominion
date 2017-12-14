@@ -1,4 +1,5 @@
 const chalk = require('chalk')
+const createOrders = require('./createPosition').createOrders
 const openSession = require('./openSession')
 
 // store client states
@@ -28,6 +29,15 @@ function input (message, callback) {
       } else {
         Clients[user.id] = openSession.sandbox(Clients[user.id], callback)
       }
+      break
+    case 'create position':
+      console.log('userID is ' + message.data.userID)
+      console.log('Clients.keys is ' + Object.keys(Clients))
+      console.log('Clients is ' + JSON.stringify(Clients))
+      // parse message to array of orders
+      // then call client
+      const orders = createOrders(message.data)
+      orders.forEach((x) => { console.log(JSON.stringify(x)) })
       break
     default:
       const msg = '/server/ClientParser switch condition not met'

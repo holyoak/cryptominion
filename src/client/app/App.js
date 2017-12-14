@@ -14,7 +14,8 @@ export default Vue.component('app', {
 
   data () {
     return {
-      dataReady: false
+      dataReady: false,
+      socket: false
     }
   },
 
@@ -34,17 +35,18 @@ export default Vue.component('app', {
   created () {
     let self = this
     const nav = window.__INITIAL_STATE__.nav
-    console.log('window.state is ' + JSON.stringify(nav))
     self.$store.commit('INIT_NAV', nav)
-// Is this the right pace to put the socket connection?
+    // open dataStream socket client
     self.dataStreams()
+    // open exchangeClient socket client
     const socket = dataSocket(window.location.host, auth, config)
+    self.$store.commit('SET_SOCKET', socket)
     socket.addEventListener('message', function (msg) {
       const m = JSON.parse(msg.data)
       if (self.dataReady === false) {
         actions(self.$store, {
           flag: 'init state',
-          data: { auth: auth }
+          data: { auth: auth, config: config }
         },
         function () {
           self.dataReady = true
@@ -59,7 +61,7 @@ export default Vue.component('app', {
   methods: {
     dataStreams () {
       let self = this
-      // the real data socket
+      // the dataStream socket client
       const socket = dataSocket('localhost:3200', {}, {})
       socket.addEventListener('message', function (msg) {
         const data = JSON.parse(msg.data)
