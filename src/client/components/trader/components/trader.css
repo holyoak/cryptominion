@@ -11,17 +11,19 @@
 .exec{
   border: solid;
   cursor: pointer;
-  margin: 1em;
   width: 100%;
 }
 .no-exec{
   border: solid;
   cursor: default;
-  margin: 1em;
   width: 100%;
 }
 .top-input{
    flex: 1;
+}
+.set-portions{
+  border: solid;
+  padding-bottom: 0.5rem;
 }
 .small-icon{
   background-color: #BB963C;
@@ -46,6 +48,8 @@
   padding: 3em;
 }
 #traderAccount{
+  border: solid;
+  border-radius: 2rem 2rem 0rem 2rem;
   position: relative;
   margin: 1em;
   padding: 1em;
@@ -60,6 +64,7 @@
 }
 #traderSell {
   background-color: #A33643;
+  border-radius: 0rem 0rem 0rem 1rem;
   margin-right: .25rem;
 }
 #traderSell .exec {

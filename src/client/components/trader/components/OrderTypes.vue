@@ -19,11 +19,18 @@
         :checked="portions.active"
         v-on:click="togglePortions"></oak-checkbox>
       <div v-if="nonActive"><small>Portions</small></div>
-      <div v-if="!nonActive" class="app-col button"
+      <div v-if="!nonActive" class="app-col button set-portions"
         @click="modalView"
-        v-bind:style="{ color:theme.accent,   backgroundColor: theme.color }">
-          <small>{{portions.portions}} orders from</small>
-          <small>min:{{range.min}}, max:{{range.max}}</small>
+        :style="{ borderColor: theme.accent, backgroundColor: theme.color }">
+        <div style="height: 0.75rem;">
+          <small>{{portions.portions}} orders</small>
+        </div>
+        <div style="height: 0.75rem;">
+          <small>min:{{range.min}}</small>
+        </div>
+        <div style="height: 0.75rem;">
+          <small>max:{{range.max}}</small>
+        </div>
       </div>
     </div>
     <oak-modal v-if="showModal"
@@ -72,13 +79,14 @@ export default {
     'activePrice',
     'hasLimit',
     'limitOnly',
-    'type',
     'portions',
+    'precision',
+    'quoteName',
     'range',
     'rangeLabel',
     'theme',
-    'types',
-    'quoteName' ],
+    'type',
+    'types' ],
 
   data () {
     return {
@@ -104,19 +112,19 @@ export default {
         const step = Number(this.localPortions.rangePercent / 100)
         if (this.localPortions.around === true) {
           return {
-            max: this.activePrice * (Number(1 + (step / 2))),
-            min: this.activePrice * (Number(1 - (step / 2)))
+            max: this.setP(this.activePrice * (Number(1 + (step / 2)))),
+            min: this.setP(this.activePrice * (Number(1 - (step / 2))))
           }
         } else {
           if (this.rangeLabel === 'below') {
             return {
-              max: this.activePrice,
-              min: this.activePrice * (Number(1 - step))
+              max: this.setP(this.activePrice),
+              min: this.setP(this.activePrice * (Number(1 - step)))
             }
           } else {
             return {
-              max: this.activePrice * (Number(1 + step)),
-              min: this.activePrice
+              max: this.setP(this.activePrice * (Number(1 + step))),
+              min: this.setP(this.activePrice)
             }
           }
         }
@@ -135,6 +143,9 @@ export default {
       // this.localRange = JSON.parse(JSON.stringify(this.range))
       this.localRangeSpan = this.rangeSpan
       this.showModal = true
+    },
+    setP (x) {
+      return Number(x.toFixed(this.precision))
     },
     toggleLimitOnly (x) {
       this.$emit('toggle_limit_only', !x)

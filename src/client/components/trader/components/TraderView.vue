@@ -3,7 +3,7 @@
   <div v-if="!dataReady">Fetching Data...</div>
   <div id="traderAccount"
     v-if="dataReady"
-    v-bind:style="{ color:theme.accent,   backgroundColor: theme.color }">
+    :style="{ color:theme.color, borderColor: theme.accent, backgroundColor: theme.backgroundColor }">
       <div class="trade-icon"
         v-bind:style="{ borderColor:theme.color }">
         <img v-bind:src="exIcon">
