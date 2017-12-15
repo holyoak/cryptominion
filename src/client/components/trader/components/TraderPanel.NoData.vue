@@ -26,19 +26,20 @@
       Execute
     </div>
     <order-types
+      @set_portions="setPortions"
+      @toggle_limit_only="toggleLimitOnly"
+      @toggle_portions="togglePortions"
       :activePrice="activePrice"
       :hasLimit="hasLimit"
-      :types="types"
+      :limitOnly="newOrder.limitOnly"
+      :portions="newOrder.portions"
+      :precision="market.precision"
       :quoteName="quoteName"
       :range="range"
       :rangeLabel="rangeLabel"
-      :limitOnly="newOrder.limitOnly"
-      v-on:set_portions="setPortions"
-      v-on:toggle_limit_only="toggleLimitOnly"
-      v-on:toggle_portions="togglePortions"
       :theme="theme"
       :type="newOrder.type"
-      :portions="newOrder.portions">
+      :types="types">
     </order-types>
   </div>
 </div>
@@ -130,19 +131,27 @@ export default {
         const step = Number(this.newOrder.portions.rangePercent / 100)
         if (this.newOrder.portions.around === true) {
           return {
-            max: this.newOrder.price * (Number(1 + (step / 2))),
-            min: this.newOrder.price * (Number(1 - (step / 2)))
+            max: this.setPrecision(
+              this.newOrder.price * (Number(1 + (step / 2)))
+            ),
+            min: this.setPrecision(
+              this.newOrder.price * (Number(1 - (step / 2)))
+            )
           }
         } else {
           if (this.asset.side === 'buy') {
             return {
-              max: this.newOrder.price,
-              min: this.newOrder.price * (Number(1 - step))
+              max: this.setPrecision(this.newOrder.price),
+              min: this.setPrecision(
+                this.newOrder.price * (Number(1 - step))
+              )
             }
           } else {
             return {
-              max: this.newOrder.price * (Number(1 + step)),
-              min: this.newOrder.price
+              max: this.setPrecision(
+                this.newOrder.price * (Number(1 + step))
+              ),
+              min: this.setPrecision(this.newOrder.price)
             }
           }
         }
@@ -157,6 +166,7 @@ export default {
     },
     setAmount (x) { this.newOrder.amount = Number(x) },
     setPortions (x) { this.newOrder.portions = x },
+    setPrecision (x) { return Number(x.toFixed(this.market.precision)) },
     setPrice (x) { this.newOrder.price = Number(x) },
     toggleLimitOnly (x) { this.newOrder.limitOnly = !x },
     togglePortions (x) { this.newOrder.portions.active = !x }

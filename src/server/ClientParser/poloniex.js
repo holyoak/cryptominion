@@ -15,10 +15,18 @@ function parseBalances (data) {
   const res = {}
   for (const x in data.total) {
     if (Number(data.total[x]) > 0) {
-      res[x] = {
-        id: x,
-        balance: data.total[x],
-        available: data.free[x]
+      if (x === 'USDT') {
+        res['USD'] = {
+          id: 'USD',
+          balance: data.total[x],
+          available: data.free[x]
+        }
+      } else {
+        res[x] = {
+          id: x,
+          balance: data.total[x],
+          available: data.free[x]
+        }
       }
     }
   }

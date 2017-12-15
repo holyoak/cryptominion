@@ -1,7 +1,8 @@
 <template>
   <div class="app-col">
     <div @click="setAmountPercent(100)" class="themed button"
-      v-bind:style="{ borderColor: theme.color }">
+      v-bind:style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }">
       Available {{ name }}: {{ balance }}
     </div>
     <div class="app-row j-between i-start">
@@ -15,13 +16,16 @@
       <div v-if="baseActive">{{ name }} used: {{ amount }}</div>
     </div>
 
-    <div class="app-row j-between i-center" v-if="!baseActive">
-      <oak-input-number
-        @output="setAmount"
-        label="Amount"
-        placeholder="Enter an Amount"
-        :value="amount">
-      </oak-input-number>
+    <div class="app-row j-between i-start" v-if="!baseActive">
+      <div style="margin-right: 0.5rem; width: 100%;">
+        <oak-input-number
+          @output="setAmount"
+          label="Amount"
+          placeholder="Enter an Amount"
+          :theme="numberTheme"
+          :value="amount">
+        </oak-input-number>
+      </div>
       <div style="flex: 0;">
         {{ name }}
       </div>
@@ -36,23 +40,33 @@
       </div>
     </div>
     <div class="app-row j-end core-buttons">
-      <div class="themed icon-tiny button"  v-bind:style="{ borderColor: theme.color }"
+      <div class="themed icon-tiny button"
+        :style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }"
         @click="showModal=true">
         <img src="../assets/percent.svg" class="center">
       </div>
-      <div class="themed icon-tiny button"  v-bind:style="{ borderColor: theme.color }"
+      <div class="themed icon-tiny button"
+        :style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }"
         @click="setAmountPercent(50)">
         <img src="../assets/half.svg" class="center">
       </div>
-      <div class="themed icon-tiny button"  v-bind:style="{ borderColor: theme.color }"
+      <div class="themed icon-tiny button"
+        :style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }"
         @click="setAmountPercent(33.33)">
         <img src="../assets/third.svg" class="center">
       </div>
-      <div class="themed icon-tiny button"  v-bind:style="{ borderColor: theme.color }"
+      <div class="themed icon-tiny button"
+        :style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }"
         @click="setAmountPercent(25)">
         <img src="../assets/quarter.svg" class="center">
       </div>
-      <div class="themed icon-tiny button"  v-bind:style="{ borderColor: theme.color }"
+      <div class="themed icon-tiny button"
+        :style="{ backgroundColor: theme.color,
+        borderColor: theme.accent }"
         @click="setAmountPercent(20)">
         <img src="../assets/fifth.svg" class="center">
       </div>
@@ -86,6 +100,14 @@ export default {
   },
 
   computed: {
+    numberTheme () {
+      return {
+        active: Object.assign({}, this.theme, { borderColor: 'yellow' }),
+        complete: Object.assign({}, this.theme, { border: 'none' }),
+        err: Object.assign({}, this.theme, { borderColor: 'red', backgroundColor: 'white' }),
+        virgin: Object.assign({}, this.theme, { backgroundColor: 'white', color: this.theme.backgroundColor })
+      }
+    },
     pairGain () {
       return this.buy
         ? Number((this.locAmount / this.activePrice).toFixed(this.precision))

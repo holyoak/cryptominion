@@ -3,45 +3,53 @@ import Vue from 'vue'
 
 Vue.component('oak-input-number', {
   template: require('./template.html'),
-  props: [ 'label', 'placeholder', 'value' ],
+  props: [ 'label', 'placeholder', 'theme', 'value' ],
   data () {
     return {
       dirty: false,
       locPlaceholder: this.setPlaceholder(),
       locValue: this.value,
-      NaN: false,
       showInput: false
     }
   },
 
   computed: {
+    activeStyle () {
+      if (isNaN(this.locDisplay) && this.dirty === true) return this.theme.err
+      else if (this.locDisplay === this.placeholder) return this.theme.virgin
+      else return this.theme.complete
+    },
     locLabel () {
       if (this.label.length > 0 &&
        typeof this.label === 'string' &&
-       this.dirty === true &&
+       this.locDisplay !== this.placeholder &&
        this.showInput === false) {
         return this.label
       } else return false
     },
     locDisplay () {
-      if (!isNaN(this.value)  && Number(this.value) > 0) return this.value
+      if (!isNaN(this.value) && Number(this.value) > 0) return this.value
       else return this.locPlaceholder
+    },
+    makeDirty () {
+      if (this.locDisplay !== this.placeholder ||
+        this.locValue !== this.value) this.dirty = true
+    },
+    notValid () {
+      return ((isNaN(this.locValue) && isNaN(this.locDisplay)) &&
+        this.dirty === true)
     }
   },
   methods: {
     output () {
-      this.dirty = true
       this.showLabel = true
       this.showInput = false
-      console.log('this.locValue is ' + JSON.stringify(this.locValue))
       if (!isNaN(this.locValue)) this.$emit('output', this.locValue)
     },
     parse () {
-      if (!isNaN(this.locValue)) {
-        this.locValue = Number(this.locValue)
-        this.NaN = false
-      } else this.NaN = true
-      this.locPlaceholder = this.locValue
+      if (this.notValid || isNaN(this.locValue)) {
+        this.locPlaceholder = this.locValue
+      } else this.locValue = Number(this.locValue)
     },
     setPlaceholder () {
       if (this.placeholder.length > 0 && typeof this.placeholder === 'string') {
@@ -49,6 +57,9 @@ Vue.component('oak-input-number', {
       } else return ''
     },
     showUI () {
+      if (this.value !== '' && this.dirty === true) {
+        this.locValue = Number(this.value)
+      }
       this.showInput = true
       this.$nextTick(() => this.$refs.ui.focus())
     }

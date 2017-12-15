@@ -1,13 +1,13 @@
 <template>
-<div class="ticker" v-bind:style="{ backgroundColor: theme.background }">
+<div class="ticker" v-bind:style="{ backgroundColor: theme.backgroundColor }">
   <div v-if="!ticker"
-    v-bind:style="{ backgroundColor: theme.color, color: theme.accent }">
+    v-bind:style="{ backgroundColor: theme.backgroundColor, color: theme.color }">
     <b>{{ theme.name }}</b>
     <div>No Ticker Data Available</div>
   </div>
   <div class="app-row j-around title"
     v-if="ticker"
-    v-bind:style="{ backgroundColor: theme.color, color: theme.accent }">
+    v-bind:style="{ backgroundColor: theme.backgroundColor, color: theme.color }">
     <div><b>{{ theme.name }}</b></div>
   </div>
   <tick
