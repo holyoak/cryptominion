@@ -13,6 +13,10 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   store,
-  template: '<App/>',
-  components: { App }
+  components: {
+    App
+  },
+  render: function (createElement) {
+    return createElement(App)
+  }
 })

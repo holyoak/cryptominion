@@ -3,16 +3,38 @@ const chalk = require('chalk')
 const utils = require('../utils')
 
 module.exports = function (x) {
-  const res = [{
+  x.book.lastPrice = Number(x.data.rate)
+  // set response for dB
+  const res = {
     flag: 'new trade',
     data: {
-      exchange: x.exKey,
-      market: utils.parseMarketID(x.exKey, x.market),
-      side: x.data.type === 'buy' ? 'sell' : 'buy',
-      size: x.data.amount,
-      price: x.data.rate
+      _id: x.data._id,
+      rate: Number(x.data.rate),
+      type: x.data.type === 'buy' ? 'sell' : 'buy',
+      amount: Number(x.data.amount),
+      timestamp: new Date(x.data.time)
     }
-  }]
+  }
+
+  // set the dB collection
+  const collection = x.db.collection(x.exKey + '_' + x.market)
+  // commit the data
+  collection.insertOne(res.data)
+
+  // set response for app API
+  res.data.exchange = x.exKey
+  res.data.market = x.market
+  res.data.makerID = x.makerID
+  // send response to strats here
+
+  // set response for ticker
+  delete res.data._id
+  delete res.data.makerID
+  delete res.data.timestamp
+  // send ticker response
+  utils.relayData(res, x.socket)
+
+  // store current level 1 orderbook state
   const bestAsk = x.book.bestAsk
   const bestBid = x.book.bestBid
 
@@ -69,14 +91,14 @@ module.exports = function (x) {
   // if best ask has changed
   const checkAsk = utils.getBestAsk(x.book)
   if (bestAsk !== checkAsk) {
-    res.push({
+    utils.relayData({
       flag: 'new best ask',
       data: {
         exchange: x.exKey,
-        market: utils.parseMarketID(x.exKey, x.market),
+        market: x.market,
         best: checkAsk
       }
-    })
+    }, x.socket)
     x.book.bestAsk = checkAsk
     if (x.log === true) console.log('new best ask ' + checkAsk)
   }
@@ -84,19 +106,16 @@ module.exports = function (x) {
   // if best bid has changed
   const checkBid = utils.getBestBid(x.book)
   if (bestBid !== checkBid) {
-    res.push({
+    utils.relayData({
       flag: 'new best bid',
       data: {
         exchange: x.exKey,
-        market: utils.parseMarketID(x.exKey, x.market),
+        market: x.market,
         best: checkBid
       }
-    })
+    }, x.socket)
     x.book.bestBid = checkBid
     if (x.log === true) console.log('new best bid ' + checkBid)
   }
-  res.forEach((r, i) => {
-    utils.relayData(res[i], x.socket)
-  })
   return x.book
 }

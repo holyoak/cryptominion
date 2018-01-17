@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import actions from './actions'
 import auth from '../../../userAuth.json'
-import config from './userConfig.json'
+import config from '../userConfig.json'
 import dataSocket from './socket'
 import AccountsView from '../components/accounts/components/AccountsListView'
 import FabNav from '../nav/Nav'
@@ -39,7 +39,15 @@ export default Vue.component('app', {
     // open dataStream socket client
     self.dataStreams()
     // open exchangeClient socket client
-    const socket = dataSocket(window.location.host, auth, config)
+    const user = {
+      flag: 'open session',
+      user: {
+        id: config.id,
+        assets: config.assets,
+        auth: auth
+      }
+    }
+    const socket = dataSocket(window.location.host, user)
     self.$store.commit('SET_SOCKET', socket)
     socket.addEventListener('message', function (msg) {
       const m = JSON.parse(msg.data)
@@ -61,8 +69,14 @@ export default Vue.component('app', {
   methods: {
     dataStreams () {
       let self = this
+      const user = {
+        flag: 'open session',
+        user: {
+          id: config.id
+        }
+      }
       // the dataStream socket client
-      const socket = dataSocket('localhost:3200', {}, {})
+      const socket = dataSocket('localhost:3200', user)
       socket.addEventListener('message', function (msg) {
         const data = JSON.parse(msg.data)
         actions(self.$store, data)

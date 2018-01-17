@@ -10,9 +10,7 @@
     "productIDs": [
       "BTC-USD",
       "ETH-USD",
-      "LTC-USD",
-      "ETH-BTC",
-      "LTC-BTC"
+      "LTC-USD"
     ]
   },
   "poloniex": {
@@ -23,9 +21,7 @@
       "USDT_BTC",
       "USDT_ETH",
       "USDT_LTC",
-      "USDT_XMR",
-      "BTC_LTC",
-      "BTC_XMR"
+      "USDT_XMR"
     ]
   },
   "appName": "CryptoMinion",

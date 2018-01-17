@@ -48,19 +48,33 @@ export default {
   },
 
   NEW_BOOK (state, x) {
-    if (state.accounts[x.exchange].markets[x.market]) {
-      state.accounts[x.exchange].markets[x.market].lowest_ask = Number(x.book.bestAsk)
-      state.accounts[x.exchange].markets[x.market].highest_ask = Number(x.book.bestBid)
+    console.log('newbook')
+    console.log('x.exKey is ' + x.exKey)
+    console.log('state.accounts keys are ' + JSON.stringify(state.accounts))
+    if (state.accounts[x.exKey].markets[x.market]) {
+      const market = state.accounts[x.exKey].markets[x.market]
+      market.highest_bid = Number(x.bestBid)
+      market.last_price = Number(x.lastPrice)
+      market.lowest_ask = Number(x.bestAsk)
+      market.loaded = 'loaded'
     }
   },
 
   RESET_ASK (state, x) {
+    if (Number(x.best) <= 0) {
+      console.log('reset ask')
+      console.log('x is ' + JSON.stringify(x))
+    }
     if (state.accounts[x.exchange] && state.accounts[x.exchange].markets[x.market]) {
       state.accounts[x.exchange].markets[x.market].lowest_ask = Number(x.best)
     }
   },
 
   RESET_BID (state, x) {
+    if (Number(x.best) <= 0) {
+      console.log('reset bid')
+      console.log('x is ' + JSON.stringify(x))
+    }
     if (state.accounts[x.exchange] && state.accounts[x.exchange].markets[x.market]) {
       state.accounts[x.exchange].markets[x.market].highest_bid = Number(x.best)
     }
@@ -68,8 +82,8 @@ export default {
 
   RESET_PRICE (state, x) {
     if (state.accounts[x.exchange] && state.accounts[x.exchange].markets[x.market]) {
-      state.accounts[x.exchange].markets[x.market].last_price = Number(x.price)
-      if (x.market === 'BTC-USD') state.accounts[x.exchange].last_btc_price = Number(x.price)
+      state.accounts[x.exchange].markets[x.market].last_price = Number(x.rate)
+      if (x.market === 'BTC-USD' || x.marketb === 'BTC-USDT') state.accounts[x.exchange].last_btc_price = Number(x.rate)
     }
   }
 }

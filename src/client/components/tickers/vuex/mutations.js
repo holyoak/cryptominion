@@ -12,9 +12,9 @@ export default {
     const exchange = payload.exchange
     const market = payload.market
     const data = {
-      side: payload.side,
-      size: payload.size,
-      price: payload.price
+      side: payload.type,
+      size: payload.amount,
+      price: payload.rate
     }
     // protect null case
     tickers[exchange] = tickers[exchange] || {}

@@ -13,6 +13,7 @@
 <script>
 import { mapState } from 'vuex'
 import Ticker from './Ticker'
+import config from '../../../userConfig'
 
 export default {
   name: 'tickers-view',
@@ -37,25 +38,36 @@ export default {
       }
     },
     ...mapState({
-      'tickerKeys': function (state) {
+      tickerKeys (state) {
         const k = this.tickerKey
         const tickerKeys = [k]
         // grab every ticker that matches this market
-        const exchanges = Object.keys(state.tickers.tickers)
-        exchanges.forEach((x) => {
-          const markets = Object.keys(state.tickers.tickers[x])
-          markets.forEach((m) => {
-            if (state.tickers.tickers[x][m].market === k.market &&
-              state.tickers.tickers[x][m].id !== k.id) {
-              tickerKeys.push({
-                id: x + k.market,
-                exchange: x,
-                market: k.market
-              })
-            }
-          })
-        })
+        tickerKeys.concat(getTickers(k))
+        if ((k.market === 'USD' || k.market === 'USDT') &&
+          this.config.prefs.USDT === true) {
+          const m = k.market === 'USD' ? 'USD' : 'USDT'
+          tickerKeys.concat(getTickers({ id: k.id, market: m }))
+        }
         return tickerKeys
+        function getTickers (key) {
+          const res = []
+          console.log('Into getTickers')
+          const exchanges = Object.keys(state.tickers.tickers)
+          exchanges.forEach((x) => {
+            const markets = Object.keys(state.tickers.tickers[x])
+            markets.forEach((m) => {
+              if (state.tickers.tickers[x][m].market === key.market &&
+                state.tickers.tickers[x][m].id !== key.id) {
+                res.push({
+                  id: x + key.market,
+                  exchange: x,
+                  market: key.market
+                })
+              }
+            })
+          })
+          return res
+        }
       }
     })
   }

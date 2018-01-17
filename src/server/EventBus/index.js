@@ -2,6 +2,7 @@
 const parse = require('../ClientParser')
 
 module.exports = {
+  actions: actions,
   init: init
 }
 
@@ -20,4 +21,11 @@ function init (app, socket) {
       ws.send(JSON.stringify(data))
     }
   })
+}
+
+function actions (userID, exKey, data) {
+  console.log('into actions')
+  console.log('userID is ' + userID)
+  console.log('exKey is ' + exKey)
+  console.log('data is ' + data)
 }

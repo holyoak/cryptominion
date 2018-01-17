@@ -28,6 +28,7 @@ module.exports = {
       '@': resolve('src')
     }
   },
+
   module: {
     loaders: [
       {

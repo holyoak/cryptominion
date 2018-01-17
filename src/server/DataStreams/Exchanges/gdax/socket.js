@@ -2,8 +2,8 @@
 const chalk = require('chalk')
 const { EventEmitter } = require('events')
 const Websocket = require('ws')
-const Utils = require('../utils.js')
-const color = require('../../config.json').dataStreams.color
+const Utils = require('../../utils.js')
+const color = require('../../../config.json').dataStreams.color
 
 /**
  * Create a new connection to a websocket feed
