@@ -1,40 +1,43 @@
 'use strict'
 const chalk = require('chalk')
 const newBook = require('./newOrderbook')
-const parse = require('../StreamParser')
+const parse = require('../../StreamParser')
 const exKey = 'gdax'
 
-const Orderbook = {}
-// const Queue = []
-module.exports = function (market, message, socket, log) {
+module.exports = function (market, message, db, socket, log, Orderbooks) {
+// log sample message here
+//  utils.logToFile(message, 'dataFile')
+  const loaded = (Orderbooks[market] && Orderbooks[market].loaded === 'loaded')
   const params = {
     exKey: exKey,
-    book: Orderbook[market],
+    book: loaded ? Orderbooks[market] : null,
     market: market,
     data: message,
+    db: db,
     socket: socket,
     log: log
   }
   switch (message.type) {
     case 'snapshot':
-      Orderbook[market] = newBook(params)
+      Orderbooks[market] = newBook(params)
       break
     case 'l2update':
-      Orderbook[market] = l2update(params)
+      if (loaded) Orderbooks[market] = l2update(params)
       break
     case 'match':
-      Orderbook[market] = match(params)
+      if (loaded) Orderbooks[market] = match(params)
       break
     case ('subscriptions'):
       break
     case ('last_match'):
+      if (loaded) Orderbooks[market] = match(params)
       break
     default:
       console.log(chalk.bold.red('GDAX parseDataStream switch failed'))
       console.log(chalk.bold.red(JSON.stringify(message)))
       return true
   }
-  return params
+  // return params
 }
 
 function l2update (params) {
@@ -53,8 +56,12 @@ function l2update (params) {
 
 function match (params) {
   const data = {
+    _id: params.data.trade_id,
     rate: params.data.price,
     amount: params.data.size,
+    makerID: params.data.maker_order_id,
+    tradeID: params.data.trade_id,
+    time: params.data.time,
     type: params.data.side === 'buy' ? 'sell' : 'buy'
   }
   params.data = data

@@ -1,7 +1,7 @@
 'use strict'
 const chalk = require('chalk')
-const utils = require('../utils')
-const color = require('../../config.json').dataStreams.color
+const utils = require('../../utils')
+const color = require('../../../config.json').dataStreams.color
 
 module.exports = function (x) {
   const res = []
@@ -36,5 +36,6 @@ module.exports = function (x) {
   res.forEach((r, i) => {
     utils.relayData(res[i], x.socket)
   })
+  book.loaded = 'loaded'
   return book
 }

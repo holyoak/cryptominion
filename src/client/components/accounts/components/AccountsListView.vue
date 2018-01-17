@@ -1,6 +1,6 @@
 <template>
   <div id="accounts-list-view" class="lower">
-    <div class="app-rowrap j-between spaced">
+    <div class="app-row wrap j-between spaced">
       <account-view
         v-for="account in accounts"
         :account="account"

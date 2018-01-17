@@ -27,7 +27,7 @@ function openSession (user, callback) {
     // fetch available markets and related data
     Balances.parse(user.clients[exchangeID], exchangeID)
       .then((data) => { callback(null, data) })
-    Markets.parse(user.clients[exchangeID], exchangeID)
+    Markets.parse(user.id, user.clients[exchangeID], exchangeID)
       .then((data) => { callback(null, data) })
   }
   return user

@@ -1,0 +1,45 @@
+{
+  "id": 1032,
+  "orders": {
+    "baseActive": true,
+    "trail_stop": 0.02,
+    "limitOnly": true,
+    "type": "Good til Cancel",
+    "portions": {
+      "active": true,
+      "around": false,
+      "portions": 3,
+      "rangePercent": 3
+    },
+    "stops": {
+      "stopLoss": {
+        "active": false,
+        "percent": 0.02
+      },
+      "trailStop": {
+        "active": false,
+        "initPercent": 2,
+        "execPercent": 0.5
+      },
+      "targetPrice": {
+        "active": false,
+        "percent": 10
+      }
+    }
+  },
+  "assets": [
+    "AEON",
+    "ARK",
+    "USD",
+    "BTC",
+    "ETH",
+    "LTC",
+    "XMR"
+  ],
+  "prefs": {
+    "anim": true,
+    "day": false,
+    "theme": "forest",
+    "USDT": true
+  }
+}

@@ -1,20 +1,12 @@
 'use strict'
 
-export default function (port, auth, config) {
+export default function (port, init) {
   const socket = new WebSocket('ws://' + port + '/')
   socket.addEventListener('error', function (e) {
     console.log('Server socket error: ' + JSON.stringify(e))
   })
   socket.addEventListener('open', function (m) {
-    const user = {
-      flag: 'open session',
-      user: {
-        id: config.id,
-        assets: config.assets,
-        auth: auth
-      }
-    }
-    socket.send(JSON.stringify(user))
+    socket.send(JSON.stringify(init))
   })
   return socket
 }

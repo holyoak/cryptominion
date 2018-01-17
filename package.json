@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon --watch src/server --watch static src/server",
     "datastreams": "node src/server/DataStreams",
-    "start": "node src/server/DataStreams & node build/dev-server.js",
+    "start": "node src/server",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
@@ -70,6 +70,7 @@
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.6",
     "mocha": "^3.2.0",
+    "mongodb": "^3.0.0-rc0",
     "nightwatch": "^0.9.12",
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",

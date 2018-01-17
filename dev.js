@@ -1,7 +1,20 @@
-const utils = [2, 5, 7, 10, 3]
+const assert = require('assert')
+const chalk = require('chalk')
+const MongoClient = require('mongodb').MongoClient
+const data = require('./userAuth.json')
 
-const ask = utils.sort(function (a, b) {
-  return Number(a) - Number(b)
+// dB connection URL
+const url = 'mongodb://localhost:27017'
+
+// dB Name
+const dbName = 'users'
+
+// Use connect method to connect to the server
+MongoClient.connect(url, function (err, client) {
+  assert.equal(null, err)
+  console.log(chalk.green('Connected successfully to ' + dbName + ' database'))
+  const dB = client.db(dbName)
+    const collection = dB.collection(data.name)
+    // commit the data
+    collection.insertOne(data)    
 })
-
-console.log('ask is ' + ask)

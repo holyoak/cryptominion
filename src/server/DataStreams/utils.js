@@ -16,17 +16,29 @@ module.exports = {
 }
 
 function cullAsks (orderbook, min) {
-  const asks = Object.keys(orderbook.asks).filter((x) => {
-    return Number(x) > Number(min)
-  })
-  orderbook.asks = asks
+  const asks = Object.keys(orderbook.asks)
+  const len = asks.length
+  let i = 0
+  while (i < len) {
+    if (Number(asks[i]) < Number(min)) {
+      delete orderbook.asks[asks[i]]
+      orderbook.bestAsk = min
+    }
+    i++
+  }
 }
 
 function cullBids (orderbook, max) {
-  const bids = Object.keys(orderbook.bids).filter((x) => {
-    return Number(x) < Number(max)
-  })
-  orderbook.bids = bids
+  const bids = Object.keys(orderbook.bids)
+  const len = bids.length
+  let i = 0
+  while (i < len) {
+    if (Number(bids[i]) > Number(max)) {
+      delete orderbook.bids[bids[i]]
+      orderbook.bestBid = max
+    }
+    i++
+  }
 }
 
 function getBestOrders (orderbook) {
@@ -49,7 +61,6 @@ function parseMarketID (exKey, marketID) {
     case 'gdax':
       return marketID
     case 'poloniex':
-      console.log('marketID is ' + JSON.stringify(marketID))
       const i = marketID.indexOf('_')
       const quote = marketID.slice(i + 1)
       const base = marketID.slice(0, i) === 'USDT' ? 'USD' : marketID.slice(0, i)

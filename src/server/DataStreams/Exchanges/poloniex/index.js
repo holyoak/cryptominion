@@ -1,8 +1,14 @@
 'use strict'
+// some color
 const chalk = require('chalk')
-const Poloniex = require('poloniex-api-node')
 const color = require('../../config.json').dataStreams.color
+// a way to connect to the exchange API
+const Poloniex = require('poloniex-api-node')
+// local config for exchange API
 const config = require('../../config.json').poloniex
+// Each exchange requires a way to parse exchange data
+//   to our Orderbook data model, found in -> ./newOrderbook.js
+//   and a way to parse the exchange data to our normalized API
 const parse = require('./parseDataStream')
 
 module.exports = {
